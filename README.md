@@ -42,7 +42,7 @@ To upgrade to the most recent release, use
     apt-get update
     apt-get install python-pip
 
-Make sure you have the *mdframed* LaTeX package. On linux you have to install some extra libraries **before** *pandoc-latex-tip*. On a Debian-based system (including Ubuntu), you can install it as root using
+Make sure you have the *mdframed* LaTeX package. On linux you have to install some extra libraries **before** *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu), you can install it as root using
 
 	apt-get texlive-latex-extra
 
