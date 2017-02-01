@@ -55,11 +55,15 @@ def getDefined(meta):
         if 'latex-admonition' in meta and meta['latex-admonition']['t'] == 'MetaList':
             for definition in meta['latex-admonition']['c']:
                 if definition['t'] == 'MetaMap':
-                    if 'color' in definition['c'] and 'classes' in definition['c'] and definition['c']['classes']['t'] == 'MetaList':
+                    if 'classes' in definition['c'] and definition['c']['classes']['t'] == 'MetaList':
+                        if 'color' in definition['c']:
+                            color = stringify(definition['c']['color'])
+                        else:
+                            color = 'Black'
                         # color must be a valid LaTeX color (https://en.wikibooks.org/wiki/LaTeX/Colors)
                         adm = {
                             'env': 'env-' + str(uuid.uuid4()),
-                            'color': stringify(definition['c']['color']),
+                            'color': color,
                             'position': 'left',
                             'linewidth': 2,
                             'margin': -4,
