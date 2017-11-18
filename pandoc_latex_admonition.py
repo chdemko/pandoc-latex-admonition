@@ -52,8 +52,8 @@ def getDefined(meta):
     if not hasattr(getDefined, 'value'):
 
         getDefined.value = []
-        if 'latex-admonition' in meta and meta['latex-admonition']['t'] == 'MetaList':
-            for definition in meta['latex-admonition']['c']:
+        if 'pandoc-latex-admonition' in meta and meta['pandoc-latex-admonition']['t'] == 'MetaList':
+            for definition in meta['pandoc-latex-admonition']['c']:
                 if definition['t'] == 'MetaMap':
                     if 'classes' in definition['c'] and definition['c']['classes']['t'] == 'MetaList':
                         if 'color' in definition['c']:
