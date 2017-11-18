@@ -1,10 +1,10 @@
 # pandoc-latex-admonition
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/chdemko/pandoc-latex-admonition.svg)](https://scrutinizer-ci.com/g/chdemko/pandoc-latex-admonition/)
-[![PyPI version](https://img.shields.io/pypi/v/pandoc-latex-admonition.svg)](https://pypi.python.org/pypi/pandoc-latex-admonition/)
+[![PyPI version](https://img.shields.io/pypi/v/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 [![License](https://img.shields.io/pypi/l/pandoc-latex-admonition.svg)](http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html)
-[![Downloads](https://img.shields.io/pypi/dm/pandoc-latex-admonition.svg)](https://pypi.python.org/pypi/pandoc-latex-admonition/)
-[![Python version](https://img.shields.io/pypi/pyversions/pandoc-latex-admonition.svg)](https://pypi.python.org/pypi/pandoc-latex-admonition/)
-[![Development Status](https://img.shields.io/pypi/status/pandoc-latex-admonition.svg)](https://pypi.python.org/pypi/pandoc-latex-admonition/)
+[![Downloads](https://img.shields.io/pypi/dm/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
+[![Python version](https://img.shields.io/pypi/pyversions/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
+[![Development Status](https://img.shields.io/pypi/status/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 
 *pandoc-latex-admonition* is a [pandoc] filter for adding admonition to `div`s.
 
