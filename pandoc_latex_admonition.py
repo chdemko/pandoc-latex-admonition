@@ -4,304 +4,332 @@
 Pandoc filter for adding admonition in LaTeX
 """
 
-from pandocfilters import RawBlock, Para, stringify, toJSONFilters, walk
-from functools import reduce
-
-import io
-import sys
-import codecs
-import json
+from panflute import *
 import uuid
 
-defined = []
-
-def admonition(key, value, format, meta):
-    global defined
-
-    # Is it a div and the right format?
-    if key == 'Div' and format == 'latex':
-
-        # Get the attributes
-        [[id, classes, properties], content] = value
-
-        currentClasses = set(classes)
-        for elt in getDefined(meta):
-
-            # Is the classes correct?
-            if currentClasses >= elt['classes']:
-                [images, content] = getImages(content)
-                value[1] = [RawBlock('tex', '\\begin{' + elt['env'] + '}')] + content + [RawBlock('tex', '\\end{' + elt['env'] + '}')]
-
-                # The images need to be placed after the framed environment
-                if images:
-                    value[1].extend(images)
-                break
-
-def defaultEnvironment(color, classes):
+def default_environment():
     return {
-        'classes': set(classes),
         'env': 'env-' + str(uuid.uuid4()),
-        'color': color,
+        'color': 'black',
         'position': 'left',
         'linewidth': 2,
         'margin': -4,
         'innermargin': 5,
     }
 
-def getDefined(meta):
-    if not hasattr(getDefined, 'value'):
+def x11colors():
+    # See https://www.w3.org/TR/css-color-3/#svg-color
+    return {
+        'aliceblue': 'F0F8FF',
+        'antiquewhite': 'FAEBD7',
+        'aqua': '00FFFF',
+        'aquamarine': '7FFFD4',
+        'azure': 'F0FFFF',
+        'beige': 'F5F5DC',
+        'bisque': 'FFE4C4',
+        'black': '000000',
+        'blanchedalmond': 'FFEBCD',
+        'blue': '0000FF',
+        'blueviolet': '8A2BE2',
+        'brown': 'A52A2A',
+        'burlywood': 'DEB887',
+        'cadetblue': '5F9EA0',
+        'chartreuse': '7FFF00',
+        'chocolate': 'D2691E',
+        'coral': 'FF7F50',
+        'cornflowerblue': '6495ED',
+        'cornsilk': 'FFF8DC',
+        'crimson': 'DC143C',
+        'cyan': '00FFFF',
+        'darkblue': '00008B',
+        'darkcyan': '008B8B',
+        'darkgoldenrod': 'B8860B',
+        'darkgray': 'A9A9A9',
+        'darkgreen': '006400',
+        'darkgrey': 'A9A9A9',
+        'darkkhaki': 'BDB76B',
+        'darkmagenta': '8B008B',
+        'darkolivegreen': '556B2F',
+        'darkorange': 'FF8C00',
+        'darkorchid': '9932CC',
+        'darkred': '8B0000',
+        'darksalmon': 'E9967A',
+        'darkseagreen': '8FBC8F',
+        'darkslateblue': '483D8B',
+        'darkslategray': '2F4F4F',
+        'darkslategrey': '2F4F4F',
+        'darkturquoise': '00CED1',
+        'darkviolet': '9400D3',
+        'deeppink': 'FF1493',
+        'deepskyblue': '00BFFF',
+        'dimgray': '696969',
+        'dimgrey': '696969',
+        'dodgerblue': '1E90FF',
+        'firebrick': 'B22222',
+        'floralwhite': 'FFFAF0',
+        'forestgreen': '228B22',
+        'fuchsia': 'FF00FF',
+        'gainsboro': 'DCDCDC',
+        'ghostwhite': 'F8F8FF',
+        'gold': 'FFD700',
+        'goldenrod': 'DAA520',
+        'gray': '808080',
+        'green': '008000',
+        'greenyellow': 'ADFF2F',
+        'grey': '808080',
+        'honeydew': 'F0FFF0',
+        'hotpink': 'FF69B4',
+        'indianred': 'CD5C5C',
+        'indigo': '4B0082',
+        'ivory': 'FFFFF0',
+        'khaki': 'F0E68C',
+        'lavender': 'E6E6FA',
+        'lavenderblush': 'FFF0F5',
+        'lawngreen': '7CFC00',
+        'lemonchiffon': 'FFFACD',
+        'lightblue': 'ADD8E6',
+        'lightcoral': 'F08080',
+        'lightcyan': 'E0FFFF',
+        'lightgoldenrodyellow': 'FAFAD2',
+        'lightgray': 'D3D3D3',
+        'lightgreen': '90EE90',
+        'lightgrey': 'D3D3D3',
+        'lightpink': 'FFB6C1',
+        'lightsalmon': 'FFA07A',
+        'lightseagreen': '20B2AA',
+        'lightskyblue': '87CEFA',
+        'lightslategray': '778899',
+        'lightslategrey': '778899',
+        'lightsteelblue': 'B0C4DE',
+        'lightyellow': 'FFFFE0',
+        'lime': '00FF00',
+        'limegreen': '32CD32',
+        'linen': 'FAF0E6',
+        'magenta': 'FF00FF',
+        'maroon': '800000',
+        'mediumaquamarine': '66CDAA',
+        'mediumblue': '0000CD',
+        'mediumorchid': 'BA55D3',
+        'mediumpurple': '9370DB',
+        'mediumseagreen': '3CB371',
+        'mediumslateblue': '7B68EE',
+        'mediumspringgreen': '00FA9A',
+        'mediumturquoise': '48D1CC',
+        'mediumvioletred': 'C71585',
+        'midnightblue': '191970',
+        'mintcream': 'F5FFFA',
+        'mistyrose': 'FFE4E1',
+        'moccasin': 'FFE4B5',
+        'navajowhite': 'FFDEAD',
+        'navy': '000080',
+        'oldlace': 'FDF5E6',
+        'olive': '808000',
+        'olivedrab': '6B8E23',
+        'orange': 'FFA500',
+        'orangered': 'FF4500',
+        'orchid': 'DA70D6',
+        'palegoldenrod': 'EEE8AA',
+        'palegreen': '98FB98',
+        'paleturquoise': 'AFEEEE',
+        'palevioletred': 'DB7093',
+        'papayawhip': 'FFEFD5',
+        'peachpuff': 'FFDAB9',
+        'peru': 'CD853F',
+        'pink': 'FFC0CB',
+        'plum': 'DDA0DD',
+        'powderblue': 'B0E0E6',
+        'purple': '800080',
+        'red': 'FF0000',
+        'rosybrown': 'BC8F8F',
+        'royalblue': '4169E1',
+        'saddlebrown': '8B4513',
+        'salmon': 'FA8072',
+        'sandybrown': 'F4A460',
+        'seagreen': '2E8B57',
+        'seashell': 'FFF5EE',
+        'sienna': 'A0522D',
+        'silver': 'C0C0C0',
+        'skyblue': '87CEEB',
+        'slateblue': '6A5ACD',
+        'slategray': '708090',
+        'slategrey': '708090',
+        'snow': 'FFFAFA',
+        'springgreen': '00FF7F',
+        'steelblue': '4682B4',
+        'tan': 'D2B48C',
+        'teal': '008080',
+        'thistle': 'D8BFD8',
+        'tomato': 'FF6347',
+        'turquoise': '40E0D0',
+        'violet': 'EE82EE',
+        'wheat': 'F5DEB3',
+        'white': 'FFFFFF',
+        'whitesmoke': 'F5F5F5',
+        'yellow': 'FFFF00',
+        'yellowgreen': '9ACD32'
+    }
 
-        getDefined.value = []
-        if 'pandoc-latex-admonition' in meta and meta['pandoc-latex-admonition']['t'] == 'MetaList':
-            for definition in meta['pandoc-latex-admonition']['c']:
-                if definition['t'] == 'MetaMap':
-                    if 'classes' in definition['c'] and definition['c']['classes']['t'] == 'MetaList':
-                        if 'color' in definition['c']:
-                            color = stringify(definition['c']['color'])
-                        else:
-                            color = 'Black'
-                        # color must be a valid LaTeX color (https://en.wikibooks.org/wiki/LaTeX/Colors)
-                        adm = {
-                            'env': 'env-' + str(uuid.uuid4()),
-                            'color': color,
-                            'position': 'left',
-                            'linewidth': 2,
-                            'margin': -4,
-                            'innermargin': 5
-                        }
-                        classes = []
-                        for klass in definition['c']['classes']['c']:
-                            classes.append(stringify(klass))
-                        adm['classes'] = set(classes)
-                        if 'position' in definition['c']:
-                            adm['position'] = stringify(definition['c']['position'])
-                        if 'linewidth' in definition['c'] and definition['c']['linewidth']['t'] == 'MetaString':
-                            try:
-                                adm['linewidth'] = int(definition['c']['linewidth']['c'])
-                            except ValueError:
-                                pass
-                        if 'margin' in definition['c'] and definition['c']['margin']['t'] == 'MetaString':
-                            try:
-                                adm['margin'] = int(definition['c']['margin']['c'])
-                            except ValueError:
-                                pass
-                        if 'innermargin' in definition['c'] and definition['c']['innermargin']['t'] == 'MetaString':
-                            try:
-                                adm['innermargin'] = int(definition['c']['innermargin']['c'])
-                            except ValueError:
-                                pass
-                        getDefined.value.append(adm)
-        if 'header-includes' not in meta:
-            meta['header-includes'] = {u'c': [], u't': u'MetaList'}
-        meta['header-includes']['c'].append({
-            'c': [{'t': 'RawInline', 'c': ['tex', '\\usepackage{mdframed}']}],
-            't': 'MetaInlines'
-        })
-        meta['header-includes']['c'].append({
-            'c': [{'t': 'RawInline', 'c': ['tex', '\\usepackage{xcolor}']}],
-            't': 'MetaInlines'
-        })
-        
-        x11colors = {
-            'AliceBlue': 'F0F8FF',
-            'AntiqueWhite': 'FAEBD7',
-            'Aqua': '00FFFF',
-            'Aquamarine': '7FFFD4',
-            'Azure': 'F0FFFF',
-            'Beige': 'F5F5DC',
-            'Bisque': 'FFE4C4',
-            'Black': '000000',
-            'BlanchedAlmond': 'FFEBCD',
-            'Blue': '0000FF',
-            'BlueViolet': '8A2BE2',
-            'Brown': 'A52A2A',
-            'BurlyWood': 'DEB887',
-            'CadetBlue': '5F9EA0',
-            'Chartreuse': '7FFF00',
-            'Chocolate': 'D2691E',
-            'Coral': 'FF7F50',
-            'CornflowerBlue': '6495ED',
-            'Cornsilk': 'FFF8DC',
-            'Crimson': 'DC143C',
-            'Cyan': '00FFFF',
-            'DarkBlue': '00008B',
-            'DarkCyan': '008B8B',
-            'DarkGoldenrod': 'B8860B',
-            'DarkGray': 'A9A9A9',
-            'DarkGreen': '006400',
-            'DarkKhaki': 'BDB76B',
-            'DarkMagenta': '8B008B',
-            'DarkOliveGreen': '556B2F',
-            'DarkOrange': 'FF8C00',
-            'DarkOrchid': '9932CC',
-            'DarkRed': '8B0000',
-            'DarkSalmon': 'E9967A',
-            'DarkSeaGreen': '8FBC8F',
-            'DarkSlateBlue': '483D8B',
-            'DarkSlateGray': '2F4F4F',
-            'DarkTurquoise': '00CED1',
-            'DarkViolet': '9400D3',
-            'DeepPink': 'FF1493',
-            'DeepSkyBlue': '00BFFF',
-            'DimGray': '696969',
-            'DodgerBlue': '1E90FF',
-            'FireBrick': 'B22222',
-            'FloralWhite': 'FFFAF0',
-            'ForestGreen': '228B22',
-            'Fuchsia': 'FF00FF',
-            'Gainsboro': 'DCDCDC',
-            'GhostWhite': 'F8F8FF',
-            'Gold': 'FFD700',
-            'Goldenrod': 'DAA520',
-            'Gray': '808080',
-            'Green': '008000',
-            'GreenYellow': 'ADFF2F',
-            'Honeydew': 'F0FFF0',
-            'HotPink': 'FF69B4',
-            'IndianRed': 'CD5C5C',
-            'Indigo': '4B0082',
-            'Ivory': 'FFFFF0',
-            'Khaki': 'F0E68C',
-            'Lavender': 'E6E6FA',
-            'LavenderBlush': 'FFF0F5',
-            'LawnGreen': '7CFC00',
-            'LemonChiffon': 'FFFACD',
-            'LightBlue': 'ADD8E6',
-            'LightCoral': 'F08080',
-            'LightCyan': 'E0FFFF',
-            'LightGoldenrodYellow': 'FAFAD2',
-            'LightGreen': '90EE90',
-            'LightGrey': 'D3D3D3',
-            'LightPink': 'FFB6C1',
-            'LightSalmon': 'FFA07A',
-            'LightSeaGreen': '20B2AA',
-            'LightSkyBlue': '87CEFA',
-            'LightSlateGray': '778899',
-            'LightSteelBlue': 'B0C4DE',
-            'LightYellow': 'FFFFE0',
-            'Lime': '00FF00',
-            'LimeGreen': '32CD32',
-            'Linen': 'FAF0E6',
-            'Magenta': 'FF00FF',
-            'Maroon': '800000',
-            'MediumAquamarine': '66CDAA',
-            'MediumBlue': '0000CD',
-            'MediumOrchid': 'BA55D3',
-            'MediumPurple': '9370DB',
-            'MediumSeaGreen': '3CB371',
-            'MediumSlateBlue': '7B68EE',
-            'MediumSpringGreen': '00FA9A',
-            'MediumTurquoise': '48D1CC',
-            'MediumVioletRed': 'C71585',
-            'MidnightBlue': '191970',
-            'MintCream': 'F5FFFA',
-            'MistyRose': 'FFE4E1',
-            'Moccasin': 'FFE4B5',
-            'NavajoWhite': 'FFDEAD',
-            'Navy': '000080',
-            'OldLace': 'FDF5E6',
-            'Olive': '808000',
-            'OliveDrab': '6B8E23',
-            'Orange': 'FFA500',
-            'OrangeRed': 'FF4500',
-            'Orchid': 'DA70D6',
-            'PaleGoldenrod': 'EEE8AA',
-            'PaleGreen': '98FB98',
-            'PaleTurquoise': 'AFEEEE',
-            'PaleVioletRed': 'DB7093',
-            'PapayaWhip': 'FFEFD5',
-            'PeachPuff': 'FFDAB9',
-            'Peru': 'CD853F',
-            'Pink': 'FFC0CB',
-            'Plum': 'DDA0DD',
-            'PowderBlue': 'B0E0E6',
-            'Purple': '800080',
-            'Red': 'FF0000',
-            'RosyBrown': 'BC8F8F',
-            'RoyalBlue': '4169E1',
-            'SaddleBrown': '8B4513',
-            'Salmon': 'FA8072',
-            'SandyBrown': 'F4A460',
-            'SeaGreen': '2E8B57',
-            'Seashell': 'FFF5EE',
-            'Sienna': 'A0522D',
-            'Silver': 'C0C0C0',
-            'SkyBlue': '87CEEB',
-            'SlateBlue': '6A5ACD',
-            'SlateGray': '708090',
-            'Snow': 'FFFAFA',
-            'SpringGreen': '00FF7F',
-            'SteelBlue': '4682B4',
-            'Tan': 'D2B48C',
-            'Teal': '008080',
-            'Thistle': 'D8BFD8',
-            'Tomato': 'FF6347',
-            'Turquoise': '40E0D0',
-            'Violet': 'EE82EE',
-            'Wheat': 'F5DEB3',
-            'White': 'FFFFFF',
-            'WhiteSmoke': 'F5F5F5',
-            'Yellow': 'FFFF00',
-            'YellowGreen': '9ACD32'
-        }
+def admonition(elem, doc):
+    # Is it in the right format and is it Div or a CodeBlock?
+    if doc.format == 'latex' and elem.tag in ['Div', 'CodeBlock']:
 
-        tex = []
-        for name in x11colors:
-            tex.append('\\definecolor{' + name + '}{HTML}{' + x11colors[name] + '}')
-
-        meta['header-includes']['c'].append({
-            'c': [{'t': 'RawInline', 'c': ['tex', '\n'.join(tex)]}],
-            't': 'MetaInlines'
-        })
-
-        for elt in getDefined.value:
-            if elt['position'] == 'right':
-               pos = 'right'
-               inv = 'left'
-            else:
-               pos = 'left'
-               inv = 'right'
-            properties = []
-            properties.append('topline=false')
-            properties.append('bottomline=false')
-            properties.append(inv + 'line=false')
-            properties.append('linewidth=' + str(elt['linewidth']) + 'pt')
-            properties.append('inner' + pos + 'margin=' + str(elt['innermargin']) +'pt')
-            properties.append(pos + 'margin=' + str(elt['margin']) +'pt')
-            properties.append('inner' + inv + 'margin=0pt')
-            properties.append('linecolor=' + elt['color'])
-            properties.append('skipabove=\\topskip')
-            
-            meta['header-includes']['c'].append({
-                'c': [{'t': 'RawInline', 'c': ['tex', '\\newmdenv[' + ','.join(properties) + ']{' + elt['env'] + '}']}] ,
-                't': 'MetaInlines'
-            })
-    return getDefined.value
-
-def getImages(x):
-    if isinstance(x, list):
-        images = []
-        content = []
-        for item in x:
-            [itemImages, itemContent] = getImages(item)
-            images = images + itemImages
-            if itemContent != None:
-                content.append(itemContent)
-        return [images, content]
-    elif isinstance(x, dict):
-        if 't' in x:
-            if x['t'] == 'Para' and len(x['c']) == 1 and x['c'][0]['t'] == 'Image':
-                return [[x], None]
-            else:
-                [images, content] = getImages(x['c'] if 'c' in x else None)
-                return [images, {'t': x['t'], 'c': content}]
+        # Is there a latex-admonition-color attribute?
+        if 'latex-admonition-color' in elem.attributes:
+            environment = define_environment(
+                doc, 
+                elem.attributes, 
+                'latex-admonition-color', 
+                'latex-admonition-position', 
+                'latex-admonition-linewidth', 
+                'latex-admonition-margin', 
+                'latex-admonition-innermargin'
+            )
+            doc.added.append(environment)
+            return add_latex(elem, environment)
         else:
-            return [[], x]
-    else:
-        return [[], x]
+            # Get the classes
+            classes = set(elem.classes)
 
-def main():
-    toJSONFilters([admonition])
+            # Loop on all fontsize definition
+            for environment in doc.defined:
+
+                # Are the classes correct?
+                if classes >= environment['classes']:
+                    return add_latex(elem,  environment)
+
+def add_latex(elem,  environment):
+    images = []
+    def extract_images(elem, doc):
+        # Extract image which is alone with a title
+        if isinstance(elem, Para) and len(elem.content) == 1 and isinstance(elem.content[0], Image) and bool(elem.content[0].content):
+            images.append(elem)
+            return []
+    # The images need to be placed after the framed environment
+    return [
+        RawBlock('\\begin{' + environment['env'] + '}', 'tex'),
+        elem.walk(extract_images),
+        RawBlock('\\end{' + environment['env'] + '}', 'tex')
+    ] + images
+
+def prepare(doc):
+    doc.x11colors = x11colors()
+
+   # Prepare the definitions
+    doc.defined = []
+    doc.added = []
+
+    # Get the meta data
+    meta = doc.get_metadata('pandoc-latex-admonition')
+
+    if isinstance(meta, list):
+
+        # Loop on all definitions
+        for definition in meta:
+
+            # Verify the definition
+            if isinstance(definition, dict) and 'classes' in definition and isinstance(definition['classes'], list):
+                environment = define_environment(doc, definition, 'color', 'position', 'linewidth', 'margin', 'innermargin')
+                environment['classes'] = set(definition['classes'])
+                doc.defined.append(environment)
+
+def define_environment(doc, definition, key_color, key_position, key_linewidth, key_margin, key_innermargin):
+    # Get the default environment
+    environment = default_environment()
+
+    # Get the color
+    if key_color in definition:
+        color = str(definition[key_color]).lower()
+        if color in doc.x11colors:
+            environment['color'] = color
+        else:
+            # color must be a valid x11 color (https://www.w3.org/TR/css-color-3/#svg-color)
+            debug('[WARNING] pandoc-latex-admonition: ' + color + ' is not a valid x11 color; using ' + environment['color'])
+
+    # Get the position
+    if key_position in definition:
+        environment['position'] = str(definition[key_position])
+
+    # Get the line width
+    if key_linewidth in definition:
+        try:
+            linewidth = int(str(definition[key_linewidth]))
+            if linewidth <= 0:
+                debug('[WARNING] pandoc-latex-admonition: linewidth must be a positivie integer; using ' + str(environment['linewidth']))
+            else:
+                environment['linewidth'] = linewidth
+        except ValueError:
+            debug('[WARNING] pandoc-latex-admonition: linewidth is not a valid; using ' + str(environment['linewidth']))
+            
+    # Get the margin
+    if key_margin in definition:
+        try:
+            environment['margin'] = int(str(definition[key_margin]))
+        except ValueError:
+            debug('[WARNING] pandoc-latex-admonition: margin is not a valid; using ' + str(environment['margin']))
+
+    # Get the inner margin
+    if key_innermargin in definition:
+        try:
+            environment['innermargin'] = int(str(definition[key_innermargin]))
+        except ValueError:
+            debug('[WARNING] pandoc-latex-admonition: innermargin is not a valid; using ' + str(environment['innermargin']))
+
+    return environment
+
+def environment_option(inv, pos, linewidth, innermargin, margin, color):
+    properties = [
+        'topline=false',
+        'bottomline=false',
+        inv + 'line=false',
+        'linewidth=' + str(linewidth) + 'pt',
+        'inner' + pos + 'margin=' + str(innermargin) +'pt',
+        pos + 'margin=' + str(margin) +'pt',
+        'inner' + inv + 'margin=0pt',
+        'linecolor=' + color,
+        'skipabove=\\topskip'
+    ]
+    return '[' + ','.join(properties) + ']'
+    
+def finalize(doc):
+    # Add header-includes if necessary
+    if 'header-includes' not in doc.metadata:
+        doc.metadata['header-includes'] = []
+
+    # Add usefull LaTexPackage
+    doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{mdframed}', 'tex')))
+    doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{xcolor}', 'tex')))
+    
+    # Define x11 colors
+    tex = []
+    for name, color in doc.x11colors.items():
+        tex.append('\\definecolor{' + name.lower() + '}{HTML}{' + color + '}')
+    doc.metadata['header-includes'].append(MetaInlines(RawInline('\n'.join(tex), 'tex')))
+
+    # Define specific environments
+    for environment in doc.defined + doc.added:
+        if environment['position'] == 'right':
+           pos = 'right'
+           inv = 'left'
+        else:
+           pos = 'left'
+           inv = 'right'
+        
+        doc.metadata['header-includes'].append(MetaInlines(RawInline(
+            '\\newmdenv' +
+            environment_option(
+                inv,
+                pos,
+                environment['linewidth'],
+                environment['innermargin'],
+                environment['margin'],
+                environment['color']
+            ) +
+            '{' + environment['env'] + '}',
+            'tex'
+        )))
+
+def main(doc = None):
+    run_filter(admonition, prepare = prepare, finalize = finalize, doc = doc)
 
 if __name__ == '__main__':
     main()

@@ -28,7 +28,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.10.0',
+    version='0.11.0',
 
     # The project's description
     description='A pandoc filter for adding admonition in LaTeX',
@@ -49,7 +49,7 @@ setup(
     maintainer_email='chdemko@gmail.com',
 
     # Choose your license
-    license='CeCILL-B',
+    license='BSD-3-Clause',
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -75,7 +75,7 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='pandoc, filters, latex, admonition',
+    keywords='pandoc filters latex admonition',
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -96,7 +96,7 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-        'pandocfilters>=1.4',
+        'panflute>=1.10',
         'pypandoc>=1.4'
     ],
 
@@ -104,12 +104,14 @@ setup(
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    # extras_require={
-    #     'dev': ['check-manifest'],
-    #     'test': ['coverage'],
-    # },
+    extras_require={
+        'dev': ['check-manifest'],
+        'test': ['coverage'],
+    },
 
-    # If there are data files included in your packages that need to be
-    # installed, specify them here.  If using Python 2.6 or less, then these
-    # have to be included in MANIFEST.in as well.
+    # packages=find_packages(),
+    # include_package_data = True,
+
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest', 'coverage'],
 )
