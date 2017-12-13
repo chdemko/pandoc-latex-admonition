@@ -235,7 +235,14 @@ def prepare(doc):
 def define_environment(doc, definition, key_color, key_position, key_linewidth, key_margin, key_innermargin):
     # Get the default environment
     environment = default_environment()
+    define_color(doc, environment, definition, key_color)
+    define_position(doc, environment, definition, key_position)
+    define_linewidth(doc, environment, definition, key_linewidth)
+    define_margin(doc, environment, definition, key_margin)
+    define_innermargin(doc, environment, definition, key_innermargin)
+    return environment
 
+def define_color(doc, environment, definition, key_color):
     # Get the color
     if key_color in definition:
         color = str(definition[key_color]).lower()
@@ -245,10 +252,12 @@ def define_environment(doc, definition, key_color, key_position, key_linewidth, 
             # color must be a valid x11 color (https://www.w3.org/TR/css-color-3/#svg-color)
             debug('[WARNING] pandoc-latex-admonition: ' + color + ' is not a valid x11 color; using ' + environment['color'])
 
+def define_position(doc, environment, definition, key_position):
     # Get the position
     if key_position in definition:
         environment['position'] = str(definition[key_position])
 
+def define_linewidth(doc, environment, definition, key_linewidth):
     # Get the line width
     if key_linewidth in definition:
         try:
@@ -260,6 +269,7 @@ def define_environment(doc, definition, key_color, key_position, key_linewidth, 
         except ValueError:
             debug('[WARNING] pandoc-latex-admonition: linewidth is not a valid; using ' + str(environment['linewidth']))
             
+def define_margin(doc, environment, definition, key_margin):
     # Get the margin
     if key_margin in definition:
         try:
@@ -267,14 +277,13 @@ def define_environment(doc, definition, key_color, key_position, key_linewidth, 
         except ValueError:
             debug('[WARNING] pandoc-latex-admonition: margin is not a valid; using ' + str(environment['margin']))
 
+def define_innermargin(doc, environment, definition, key_innermargin):
     # Get the inner margin
     if key_innermargin in definition:
         try:
             environment['innermargin'] = int(str(definition[key_innermargin]))
         except ValueError:
             debug('[WARNING] pandoc-latex-admonition: innermargin is not a valid; using ' + str(environment['innermargin']))
-
-    return environment
 
 def environment_option(inv, pos, linewidth, innermargin, margin, color):
     properties = [
