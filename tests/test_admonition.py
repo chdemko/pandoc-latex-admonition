@@ -31,7 +31,8 @@ def test_codeblock_attributes():
             'latex-admonition-color': 'xyz',
             'latex-admonition-linewidth': 'xyz',
             'latex-admonition-margin': 'xyz',
-            'latex-admonition-innermargin': 'xyz'
+            'latex-admonition-innermargin': 'xyz',
+            'latex-admonition-localfootnotes': 'true'
         }
     )
     doc = Doc(elem, format='latex', api_version=(1, 17, 2))
