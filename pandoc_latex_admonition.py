@@ -291,10 +291,7 @@ def define_innermargin(doc, environment, definition, key_innermargin):
 def define_localfootnotes(doc, environment, definition, key_localfootnotes):
     # Get the local footnotes
     if key_localfootnotes in definition:
-        try:
-            environment['localfootnotes'] = bool(str(definition[key_localfootnotes]))
-        except ValueError:
-            debug('[WARNING] pandoc-latex-admonition: localfootnotes is not a valid; using ' + str(environment['localfootnotes']))
+        environment['localfootnotes'] = str(definition[key_localfootnotes]) == 'true'
 
 def environment_option(position, linewidth, innermargin, margin, color):
     if position == 'right':
