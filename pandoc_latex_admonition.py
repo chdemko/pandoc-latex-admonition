@@ -15,6 +15,7 @@ def default_environment():
         'linewidth': 2,
         'margin': -4,
         'innermargin': 5,
+        'localfootnotes': False
     }
 
 def x11colors():
@@ -176,13 +177,14 @@ def admonition(elem, doc):
         # Is there a latex-admonition-color attribute?
         if 'latex-admonition-color' in elem.attributes:
             environment = define_environment(
-                doc, 
-                elem.attributes, 
-                'latex-admonition-color', 
-                'latex-admonition-position', 
-                'latex-admonition-linewidth', 
-                'latex-admonition-margin', 
-                'latex-admonition-innermargin'
+                doc,
+                elem.attributes,
+                'latex-admonition-color',
+                'latex-admonition-position',
+                'latex-admonition-linewidth',
+                'latex-admonition-margin',
+                'latex-admonition-innermargin',
+                'latex-admonition-localfootnotes'
             )
             doc.added.append(environment)
             return add_latex(elem, environment)
@@ -228,11 +230,11 @@ def prepare(doc):
 
             # Verify the definition
             if isinstance(definition, dict) and 'classes' in definition and isinstance(definition['classes'], list):
-                environment = define_environment(doc, definition, 'color', 'position', 'linewidth', 'margin', 'innermargin')
+                environment = define_environment(doc, definition, 'color', 'position', 'linewidth', 'margin', 'innermargin', 'localfootnotes')
                 environment['classes'] = set(definition['classes'])
                 doc.defined.append(environment)
 
-def define_environment(doc, definition, key_color, key_position, key_linewidth, key_margin, key_innermargin):
+def define_environment(doc, definition, key_color, key_position, key_linewidth, key_margin, key_innermargin, key_localfootnotes):
     # Get the default environment
     environment = default_environment()
     define_color(doc, environment, definition, key_color)
@@ -240,6 +242,7 @@ def define_environment(doc, definition, key_color, key_position, key_linewidth, 
     define_linewidth(doc, environment, definition, key_linewidth)
     define_margin(doc, environment, definition, key_margin)
     define_innermargin(doc, environment, definition, key_innermargin)
+    define_localfootnotes(doc, environment, definition, key_localfootnotes)
     return environment
 
 def define_color(doc, environment, definition, key_color):
@@ -268,7 +271,7 @@ def define_linewidth(doc, environment, definition, key_linewidth):
                 environment['linewidth'] = linewidth
         except ValueError:
             debug('[WARNING] pandoc-latex-admonition: linewidth is not a valid; using ' + str(environment['linewidth']))
-            
+
 def define_margin(doc, environment, definition, key_margin):
     # Get the margin
     if key_margin in definition:
@@ -285,7 +288,22 @@ def define_innermargin(doc, environment, definition, key_innermargin):
         except ValueError:
             debug('[WARNING] pandoc-latex-admonition: innermargin is not a valid; using ' + str(environment['innermargin']))
 
-def environment_option(inv, pos, linewidth, innermargin, margin, color):
+def define_localfootnotes(doc, environment, definition, key_localfootnotes):
+    # Get the local footnotes
+    if key_localfootnotes in definition:
+        try:
+            environment['localfootnotes'] = bool(str(definition[key_localfootnotes]))
+        except ValueError:
+            debug('[WARNING] pandoc-latex-admonition: localfootnotes is not a valid; using ' + str(environment['localfootnotes']))
+
+def environment_option(position, linewidth, innermargin, margin, color):
+    if position == 'right':
+       pos = 'right'
+       inv = 'left'
+    else:
+       pos = 'left'
+       inv = 'right'
+
     properties = [
         'topline=false',
         'bottomline=false',
@@ -298,7 +316,34 @@ def environment_option(inv, pos, linewidth, innermargin, margin, color):
         'skipabove=\\topskip'
     ]
     return '[' + ','.join(properties) + ']'
-    
+
+def new_environment(environment):
+    if environment['localfootnotes']:
+        return '\n'.join([
+            '\\newenvironment{' + environment['env'] + '}',
+            '{',
+            '    \\begin{mdframed}' + environment_option(environment['position'], environment['linewidth'], environment['innermargin'], environment['margin'], environment['color']),
+            '}',
+            '{',
+            '    \\end{mdframed}',
+            '}'
+        ])
+    else:
+        return '\n'.join([
+            '\\newenvironment{' + environment['env'] + '}',
+            '{',
+            '    \\savenotes',
+            '    \\begin{mdframed}' + environment_option(environment['position'], environment['linewidth'], environment['innermargin'], environment['margin'], environment['color']),
+            '    \\let\\thempfootnote=\\thefootnote',
+            '    \\let\\oldfootnote\\footnote',
+            '    \\renewcommand{\\footnote}[1]{\\stepcounter{footnote}\\oldfootnote{##1}}',
+            '}',
+            '{',
+            '    \\end{mdframed}',
+            '    \\spewnotes',
+            '}'
+        ])
+
 def finalize(doc):
     # Add header-includes if necessary
     if 'header-includes' not in doc.metadata:
@@ -307,7 +352,8 @@ def finalize(doc):
     # Add usefull LaTexPackage
     doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{mdframed}', 'tex')))
     doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{xcolor}', 'tex')))
-    
+    doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{footnote}', 'tex')))
+
     # Define x11 colors
     tex = []
     for name, color in doc.x11colors.items():
@@ -316,26 +362,7 @@ def finalize(doc):
 
     # Define specific environments
     for environment in doc.defined + doc.added:
-        if environment['position'] == 'right':
-           pos = 'right'
-           inv = 'left'
-        else:
-           pos = 'left'
-           inv = 'right'
-        
-        doc.metadata['header-includes'].append(MetaInlines(RawInline(
-            '\\newmdenv' +
-            environment_option(
-                inv,
-                pos,
-                environment['linewidth'],
-                environment['innermargin'],
-                environment['margin'],
-                environment['color']
-            ) +
-            '{' + environment['env'] + '}',
-            'tex'
-        )))
+        doc.metadata['header-includes'].append(MetaInlines(RawInline(new_environment(environment), 'tex')))
 
 def main(doc = None):
     run_filter(admonition, prepare = prepare, finalize = finalize, doc = doc)

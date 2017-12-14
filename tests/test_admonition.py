@@ -23,9 +23,7 @@ def test_codeblock_classes():
     pandoc_latex_admonition.main(doc)
     assert doc.content[0].format == 'tex'
     assert doc.content[2].format == 'tex'
-    assert doc.get_metadata()['header-includes'][-1].startswith(
-        '\\newmdenv' + pandoc_latex_admonition.environment_option('left', 'right', 5, -8, 10, 'red')
-    )
+    assert pandoc_latex_admonition.environment_option('right', 5, -8, 10, 'red') in doc.get_metadata()['header-includes'][-1]
 
 def test_codeblock_attributes():
     elem = Div(
@@ -40,9 +38,7 @@ def test_codeblock_attributes():
     pandoc_latex_admonition.main(doc)
     assert doc.content[0].format == 'tex'
     assert doc.content[2].format == 'tex'
-    assert doc.get_metadata()['header-includes'][-1].startswith(
-        '\\newmdenv' + pandoc_latex_admonition.environment_option('right', 'left', 2, 5, -4, 'black')
-    )
+    assert pandoc_latex_admonition.environment_option('left', 2, 5, -4, 'black') in doc.get_metadata()['header-includes'][-1]
 
 def test_codeblock_images():
     elem = Div(
