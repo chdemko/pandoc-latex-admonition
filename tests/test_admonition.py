@@ -5,53 +5,59 @@ from panflute import *
 
 import pandoc_latex_admonition
 
+from helper import conversion
+
 def test_codeblock_classes():
-    elem = CodeBlock('', classes=['class1', 'class2'])
-    metadata = {
-        'pandoc-latex-admonition': MetaList(
-            MetaMap(
-                classes=MetaList(MetaString('class1'), MetaString('class2')),
-                color=MetaString('red'),
-                position=MetaString('right'),
-                linewidth=MetaString('5'),
-                innermargin=MetaString('-8'),
-                margin=MetaString('10')
-            )
-        )
-    }
-    doc = Doc(elem, metadata=metadata, format='latex', api_version=(1, 17, 2))
-    pandoc_latex_admonition.main(doc)
-    assert doc.content[0].format == 'tex'
-    assert doc.content[2].format == 'tex'
+    doc = conversion(
+        '''
+---
+pandoc-latex-admonition:
+  - classes: ['class1', 'class2']
+    color: red
+    position: right
+    linewidth: 5
+    innermargin: -8
+    margin: 10
+---
+~~~{.class1 .class2}
+~~~
+        ''',
+        'latex'
+    )
+    text = convert_text(doc, input_format='panflute', output_format='latex', extra_args=['--wrap=none'])
+    assert '\\begin{env-' in text
+    assert '\\end{env-' in text
     assert pandoc_latex_admonition.environment_option('right', 5, -8, 10, 'red') in doc.get_metadata()['header-includes'][-1]
 
 def test_codeblock_attributes():
-    elem = Div(
-        attributes={
-            'latex-admonition-color': 'xyz',
-            'latex-admonition-linewidth': 'xyz',
-            'latex-admonition-margin': 'xyz',
-            'latex-admonition-innermargin': 'xyz',
-            'latex-admonition-localfootnotes': 'true'
-        }
+    doc = conversion(
+        '''
+::: {latex-admonition-color=xyz latex-admonition-linewidth=xyz' latex-admonition-margin=xyz latex-admonition-innermargin=xyz latex-admonition-localfootnotes=true} :::
+:::::::::
+        ''',
+        'latex'
     )
-    doc = Doc(elem, format='latex', api_version=(1, 17, 2))
-    pandoc_latex_admonition.main(doc)
-    assert doc.content[0].format == 'tex'
-    assert doc.content[2].format == 'tex'
+    text = convert_text(doc, input_format='panflute', output_format='latex', extra_args=['--wrap=none'])
+    assert '\\begin{env-' in text
+    assert '\\end{env-' in text
     assert pandoc_latex_admonition.environment_option('left', 2, 5, -4, 'black') in doc.get_metadata()['header-includes'][-1]
 
 def test_codeblock_images():
-    elem = Div(
-        Para(Image(Str('Title'))),
-        Para(Str('Hello')),
-        
-        attributes={
-            'latex-admonition-color': 'black',
-        },
+    doc = conversion(
+        '''
+::: {latex-admonition-color=black} :::
+
+![Title]()
+
+Hello
+:::::::::
+        ''',
+        'latex'
     )
-    doc = Doc(elem, format='latex', api_version=(1, 17, 2))
-    pandoc_latex_admonition.main(doc)
+    text = convert_text(doc, input_format='panflute', output_format='latex', extra_args=['--wrap=none'])
+    assert '\\begin{env-' in text
+    assert '\\end{env-' in text
+    assert pandoc_latex_admonition.environment_option('left', 2, 5, -4, 'black') in doc.get_metadata()['header-includes'][-1]
     assert isinstance(doc.content[-1], Para)
     assert isinstance(doc.content[-1].content[0], Image)
 
