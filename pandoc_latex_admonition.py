@@ -362,7 +362,7 @@ def finalize(doc):
         doc.metadata['header-includes'].append(MetaInlines(RawInline(new_environment(environment), 'tex')))
 
 def main(doc = None):
-    run_filter(admonition, prepare = prepare, finalize = finalize, doc = doc)
+    return run_filter(admonition, prepare = prepare, finalize = finalize, doc = doc)
 
 if __name__ == '__main__':
     main()
