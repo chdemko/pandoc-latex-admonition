@@ -344,7 +344,10 @@ def new_environment(environment):
 def finalize(doc):
     # Add header-includes if necessary
     if 'header-includes' not in doc.metadata:
-        doc.metadata['header-includes'] = []
+        doc.metadata['header-includes'] = MetaList()
+    # Convert header-includes to MetaList if necessary
+    elif not isinstance(doc.metadata['header-includes'], MetaList):
+        doc.metadata['header-includes'] = MetaList(doc.metadata['header-includes'])
 
     # Add usefull LaTexPackage
     doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{mdframed}', 'tex')))
