@@ -42,7 +42,7 @@ def test_codeblock_attributes():
     assert '\\end{env-' in text
     assert pandoc_latex_admonition.environment_option('left', 2, 5, -4, 'black') in doc.get_metadata()['header-includes'][-1]
 
-def test_codeblock_images():
+def test_latex_images():
     doc = conversion(
         '''
 ::: {latex-admonition-color=black} :::
@@ -60,4 +60,20 @@ Hello
     assert pandoc_latex_admonition.environment_option('left', 2, 5, -4, 'black') in doc.get_metadata()['header-includes'][-1]
     assert isinstance(doc.content[-1], Para)
     assert isinstance(doc.content[-1].content[0], Image)
+
+def test_beamer_notes():
+    doc = conversion(
+        '''
+::: {latex-admonition-color=black} :::
+
+This a text[^note]
+
+[^note]: This is a *note*
+
+:::
+        ''',
+        'beamer'
+    )
+    text = convert_text(doc, input_format='panflute', output_format='beamer', extra_args=['--wrap=none'])
+    assert 'This a text\\footnote<.->[frame]{This is a \\emph{note}}' in text
 

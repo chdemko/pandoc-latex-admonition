@@ -172,7 +172,7 @@ def x11colors():
 
 def admonition(elem, doc):
     # Is it in the right format and is it Div or a CodeBlock?
-    if doc.format == 'latex' and elem.tag in ['Div', 'CodeBlock']:
+    if doc.format in ['latex', 'beamer'] and elem.tag in ['Div', 'CodeBlock']:
 
         # Is there a latex-admonition-color attribute?
         if 'latex-admonition-color' in elem.attributes:
@@ -199,7 +199,17 @@ def admonition(elem, doc):
                 if classes >= environment['classes']:
                     return add_latex(elem,  environment)
 
-def add_latex(elem,  environment):
+def add_latex(elem, environment):
+    def note(elem, doc):
+        if isinstance(elem, Note) and doc.format == 'beamer' and not environment['localfootnotes']:
+            return RawInline(
+                ''.join([
+                    '\\footnote<.->[frame]{',
+                    convert_text(elem.content, input_format='panflute', output_format='latex'),
+                    '}',
+                ]),
+                'tex')
+
     images = []
     def extract_images(elem, doc):
         # Extract image which is alone with a title
@@ -209,7 +219,7 @@ def add_latex(elem,  environment):
     # The images need to be placed after the framed environment
     return [
         RawBlock('\\begin{' + environment['env'] + '}', 'tex'),
-        elem.walk(extract_images),
+        elem.walk(extract_images).walk(note),
         RawBlock('\\end{' + environment['env'] + '}', 'tex')
     ] + images
 
@@ -314,8 +324,8 @@ def environment_option(position, linewidth, innermargin, margin, color):
     ]
     return '[' + ','.join(properties) + ']'
 
-def new_environment(environment):
-    if environment['localfootnotes']:
+def new_environment(doc, environment):
+    if environment['localfootnotes'] or doc.format == 'beamer':
         return '\n'.join([
             '\\newenvironment{' + environment['env'] + '}',
             '{',
@@ -336,6 +346,7 @@ def new_environment(environment):
             '    \\renewcommand{\\footnote}[1]{\\stepcounter{footnote}\\oldfootnote{##1}}',
             '}',
             '{',
+            '    \\let\\footnote\\oldfootnote',
             '    \\end{mdframed}',
             '    \\spewnotes',
             '}'
@@ -352,7 +363,8 @@ def finalize(doc):
     # Add usefull LaTexPackage
     doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{mdframed}', 'tex')))
     doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{xcolor}', 'tex')))
-    doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{footnote}', 'tex')))
+    if doc.format == 'latex':
+        doc.metadata['header-includes'].append(MetaInlines(RawInline('\\usepackage{footnote}', 'tex')))
 
     # Define x11 colors
     tex = []
@@ -362,7 +374,7 @@ def finalize(doc):
 
     # Define specific environments
     for environment in doc.defined + doc.added:
-        doc.metadata['header-includes'].append(MetaInlines(RawInline(new_environment(environment), 'tex')))
+        doc.metadata['header-includes'].append(MetaInlines(RawInline(new_environment(doc, environment), 'tex')))
 
 def main(doc = None):
     return run_filter(admonition, prepare = prepare, finalize = finalize, doc = doc)
