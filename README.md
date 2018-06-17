@@ -5,7 +5,6 @@
 [![PyPI version](https://img.shields.io/pypi/v/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 [![PyPI format](https://img.shields.io/pypi/format/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 [![License](https://img.shields.io/pypi/l/pandoc-latex-admonition.svg)](https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/LICENSE)
-[![Downloads](https://img.shields.io/pypi/dm/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 [![Python version](https://img.shields.io/pypi/pyversions/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 [![Development Status](https://img.shields.io/pypi/status/pandoc-latex-admonition.svg)](https://pypi.org/project/pandoc-latex-admonition/)
 
