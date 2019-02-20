@@ -76,9 +76,9 @@ Example
 -------
 
 Demonstration: Using
-`pandoc-latex-admonition-sample.txt <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/pandoc-latex-admonition-sample.txt>`__
+:download:`pandoc-latex-admonition-sample.txt <images/pandoc-latex-admonition-sample.txt>`
 as input gives output file in
-`pdf <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/pandoc-latex-admonition-sample.pdf>`__.
+:download:`pdf <images/pandoc-latex-admonition-sample.pdf>`.
 You must have the
-`Markdown-mark.svg.png <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/Markdown-mark.svg.png>`__
+:download:`Markdown-mark.svg.png <images/Markdown-mark.svg.png>`
 image for correct testing.

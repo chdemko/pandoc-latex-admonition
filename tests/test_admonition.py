@@ -9,9 +9,9 @@ import pandoc_latex_admonition
 
 class TipTest(TestCase):
     @classmethod
-    def conversion(cls, markdown, format="markdown"):
+    def conversion(cls, markdown, fmt="markdown"):
         doc = convert_text(markdown, standalone=True)
-        doc.format = format
+        doc.format = fmt
         pandoc_latex_admonition.main(doc)
         return doc
 

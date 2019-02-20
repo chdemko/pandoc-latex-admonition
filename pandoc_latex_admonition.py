@@ -602,92 +602,110 @@ def new_environment(doc, environment):
         The LaTeX environment
     """
     options = ["blanker"]
+
     if not environment["nobreak"]:
         options.append("breakable")
     if environment["position"] == "left":
-        options.append(
-            "left=%gpt,borderline west={%gpt}{%gpt}{%s}"
-            % (
-                environment["innermargin"],
-                environment["linewidth"],
-                environment["margin"],
-                environment["color"],
-            )
-        )
+        options.append(left_bar(environment))
     elif environment["position"] == "right":
-        options.append(
-            "right=%gpt,borderline east={%gpt}{%gpt}{%s}"
-            % (
-                environment["innermargin"],
-                environment["linewidth"],
-                environment["margin"],
-                environment["color"],
-            )
-        )
+        options.append(right_bar(environment))
     elif environment["position"] == "inner":
         options.append(
-            "if odd page={%s}{%s}"
-            % (
-                "left=%gpt,borderline west={%gpt}{%gpt}{%s}"
-                % (
-                    environment["innermargin"],
-                    environment["linewidth"],
-                    environment["margin"],
-                    environment["color"],
-                ),
-                "right=%gpt,borderline east={%gpt}{%gpt}{%s}"
-                % (
-                    environment["innermargin"],
-                    environment["linewidth"],
-                    environment["margin"],
-                    environment["color"],
-                ),
-            )
+            "if odd page={%s}{%s}" % (left_bar(environment), right_bar(environment))
         )
     elif environment["position"] == "outer":
         options.append(
-            "if odd page={%s}{%s}"
-            % (
-                "right=%fpt,borderline east={%fpt}{%fpt}{%s}"
-                % (
-                    environment["innermargin"],
-                    environment["linewidth"],
-                    environment["margin"],
-                    environment["color"],
-                ),
-                "left=%fpt,borderline west={%fpt}{%fpt}{%s}"
-                % (
-                    environment["innermargin"],
-                    environment["linewidth"],
-                    environment["margin"],
-                    environment["color"],
-                ),
-            )
+            "if odd page={%s}{%s}" % (right_bar(environment), left_bar(environment))
         )
+    else:
+        options.append(left_bar(environment))
+
     if environment["localfootnotes"] or doc.format == "beamer":
-        return "\n".join(
-            [
-                r"\newenvironment{%s}" % environment["env"],
-                r"{",
-                r"    \tcolorbox[%s]" % ",".join(options),
-                r"}",
-                r"{",
-                r"    \endtcolorbox",
-                r"}",
-            ]
+        return r"""
+\newenvironment{%s}
+{
+    \tcolorbox[%s]
+}
+{
+    \endtcolorbox
+}
+        """ % (
+            environment["env"],
+            ",".join(options),
         )
-    return "\n".join(
-        [
-            r"\newenvironment{%s}" % environment["env"],
-            r"{",
-            r"    \savenotes",
-            r"    \tcolorbox[%s]" % ",".join(options),
-            r"}",
-            r"{",
-            r"    \endtcolorbox",
-            r"    \spewnotes",
-            r"}",
-        ]
+    return r"""
+\newenvironment{%s}
+{
+    \savenotes\tcolorbox[%s]
+}
+{
+    \endtcolorbox\spewnotes
+}
+                """ % (
+        environment["env"],
+        ",".join(options),
+    )
+
+
+def left_bar(environment):
+    """
+    Generates a left bar
+
+    Arguments
+    ---------
+        environment:
+            The environment
+
+    Returns
+    -------
+        The left bar options
+    """
+    return bar(environment, "left", "west")
+
+
+def right_bar(environment):
+    """
+    Generates a right bar
+
+    Arguments
+    ---------
+        environment:
+            The environment
+
+    Returns
+    -------
+        The right bar options
+    """
+    return bar(environment, "right", "east")
+
+
+# pylint: disable=blacklisted-name
+def bar(environment, position, localization):
+    """
+    Generates a bar
+
+    Arguments
+    ---------
+        environment:
+            The environment
+
+        position:
+            left or right
+
+        localization:
+            east or west
+
+    Returns
+    -------
+        The bar options
+    """
+    return "%s=%gpt,borderline %s={%gpt}{%gpt}{%s}" % (
+        position,
+        environment["innermargin"],
+        localization,
+        environment["linewidth"],
+        environment["margin"],
+        environment["color"],
     )
 
 
