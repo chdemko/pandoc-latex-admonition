@@ -15,7 +15,7 @@
 
 *pandoc-latex-admonition* is a [pandoc] filter for adding admonition to `div`s or `codeblock`s elements.
 
-It uses the *mdframed* LaTeX package to generate admonitions and the *footnote* LaTeX package to handle correctly footnotes in admonition.
+It uses the *tcolorbox* LaTeX package to generate admonitions and the *footnote* LaTeX package to handle correctly footnotes in admonition.
 
 [pandoc]: http://pandoc.org/
 
@@ -23,6 +23,7 @@ Documentation
 -------------
 
 See the [Read the docs pages](http://pandoc-latex-admonition.readthedocs.io/en/latest/).
+
 Usage
 -----
 
