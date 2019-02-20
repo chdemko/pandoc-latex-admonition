@@ -79,7 +79,7 @@ Example
 Demonstration: Using
 `pandoc-latex-admonition-sample.txt <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/pandoc-latex-admonition-sample.txt>`__
 as input gives output file in
-`pdf <https://raw.githubusercontent.com/wiki/chdemko/pandoc-latex-admonition/master/docs/images/pandoc-latex-admonition-sample.pdf>`__.
+`pdf <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/pandoc-latex-admonition-sample.pdf>`__.
 You must have the
 `Markdown-mark.svg.png <https://raw.githubusercontent.com/chdemko/pandoc-latex-admonition/master/docs/images/Markdown-mark.svg.png>`__
 image for correct testing.
