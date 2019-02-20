@@ -12,7 +12,7 @@ install:
   - pip install coveralls
 script:
   - black --check pandoc_latex_admonition.py setup.py tests/test_admonition.py
-  - pylint pandoc_latex_admonition.py setup.py tests/test_admonition.py
+  - pylint pandoc_latex_admonition.py setup.py
   - coverage run -a --source=pandoc_latex_admonition setup.py test
 after_success:
   - coveralls
