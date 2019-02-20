@@ -70,7 +70,6 @@ The following LaTeX packages are required:
 -  ``tcolorbox``
 -  ``xcolor``
 -  ``footnote``
--  ``changepage``
 -  ``ifthen``
 
 Example
