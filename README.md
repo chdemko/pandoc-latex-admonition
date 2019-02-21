@@ -34,7 +34,7 @@ To apply the filter, use the following option with pandoc:
 Installation
 ------------
 
-*pandoc-latex-admonition* requires [python], a programming language that comes pre-installed on linux and Mac OS X, and which is easily installed [on Windows]. Either python 2.7 or 3.x will do.
+*pandoc-latex-admonition* requires [python 3.6], a programming language that comes pre-installed on linux and Mac OS X, and which is easily installed [on Windows].
 
 Install *pandoc-latex-admonition* as root using the bash command
 
@@ -53,11 +53,18 @@ To upgrade to the current code, use
     apt-get update
     apt-get install python-pip
 
-Make sure you have the *mdframed* LaTeX package. On linux you have to install some extra libraries **before** *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu), you can install it as root using
+Make sure you have the
+
+* *tcolorbox*
+* *footnote*
+* *xcolor*
+* *ifthen*
+
+LaTeX packages. On linux you have to install some extra libraries **before** *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu), you can install it as root using
 
 	apt-get texlive-latex-extra
 
-[python]: https://www.python.org
+[python 3.6]: https://www.python.org
 [on Windows]: https://www.python.org/downloads/windows
 [PyPI]: https://pypi.org
 

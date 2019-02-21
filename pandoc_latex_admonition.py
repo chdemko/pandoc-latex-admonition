@@ -727,9 +727,6 @@ def finalize(doc):
 
     # Add usefull LaTexPackage
     doc.metadata["header-includes"].append(
-        MetaInlines(RawInline("\\usepackage{mdframed}", "tex"))
-    )
-    doc.metadata["header-includes"].append(
         MetaInlines(RawInline("\\usepackage{xcolor}", "tex"))
     )
     if doc.format == "latex":
