@@ -17,6 +17,7 @@ from panflute import (
     Image,
     MetaList,
     MetaInlines,
+    MetaBool,
 )
 
 
@@ -718,6 +719,10 @@ def finalize(doc):
         doc:
             The pandoc document
     """
+    # load footnote or footnotehyper package
+    if doc.format == "latex":
+        doc.metadata["tables"] = MetaBool(True)
+
     # Add header-includes if necessary
     if "header-includes" not in doc.metadata:
         doc.metadata["header-includes"] = MetaList()
@@ -729,10 +734,6 @@ def finalize(doc):
     doc.metadata["header-includes"].append(
         MetaInlines(RawInline("\\usepackage{xcolor}", "tex"))
     )
-    if doc.format == "latex":
-        doc.metadata["header-includes"].append(
-            MetaInlines(RawInline("\\usepackage{footnote}", "tex"))
-        )
 
     # Define x11 colors
     tex = []
