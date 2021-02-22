@@ -17,7 +17,6 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="1.3.2",
     # The project's description
     description="A pandoc filter for adding admonition in LaTeX",
     long_description=LONG_DESCRIPTION,
@@ -25,7 +24,7 @@ setup(
     # The project's main homepage.
     url="https://github.com/chdemko/pandoc-latex-admonition",
     # The project's download page
-    download_url="https://github.com/chdemko/pandoc-latex-admonition/archive/master.zip",
+    download_url="https://github.com/chdemko/pandoc-latex-admonition/archive/develop.zip",
     # Author details
     author="Christophe Demko",
     author_email="chdemko@gmail.com",

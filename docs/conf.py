@@ -26,13 +26,12 @@ on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 # -- Project information -----------------------------------------------------
 
 project = "pandoc-latex-admonition"
-copyright = "2017-2019, Christophe Demko"
 author = "Christophe Demko"
 
 # The short X.Y version
-version = "1.3"
+#version = "1.3"
 # The full version, including alpha/beta/rc tags
-release = "1.3.1"
+#release = "1.3.2"
 
 # -- General configuration ---------------------------------------------------
 
