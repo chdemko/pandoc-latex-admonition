@@ -18,6 +18,7 @@
 
 import os
 import sys
+from datetime import date
 
 sys.path.insert(0, os.path.abspath("../.."))
 
@@ -27,11 +28,11 @@ on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 
 project = "pandoc-latex-admonition"
 author = "Christophe Demko"
-
+copyright = "2017-%s, Christophe Demko" % date.today().year
 # The short X.Y version
-#version = "1.3"
+version = "1.3"
 # The full version, including alpha/beta/rc tags
-#release = "1.3.2"
+release = "1.3.2"
 
 # -- General configuration ---------------------------------------------------
 
