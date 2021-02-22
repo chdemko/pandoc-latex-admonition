@@ -5,34 +5,23 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/chdemko/pandoc-latex-admonition
 """
 
-# To use a consistent encoding
-import codecs
-import os
-
 # Always prefer setuptools over distutils
 from setuptools import setup
 
-HERE = os.path.abspath(os.path.dirname(__file__))
-
 # Get the long description from the README file
-try:
-    import pypandoc
-
-    LONG_DESCRIPTION = pypandoc.convert("README.md", "rst")
-except (IOError, ImportError):
-    with codecs.open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
-        LONG_DESCRIPTION = f.read()
-
+with open("README.md", "r") as stream:
+    LONG_DESCRIPTION = stream.read()
 
 setup(
     name="pandoc-latex-admonition",
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="1.3.1",
+    version="1.3.2",
     # The project's description
     description="A pandoc filter for adding admonition in LaTeX",
     long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/markdown",
     # The project's main homepage.
     url="https://github.com/chdemko/pandoc-latex-admonition",
     # The project's download page
@@ -62,6 +51,9 @@ setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     # What does your project relate to?
     keywords="pandoc filters latex admonition",
@@ -78,14 +70,15 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["panflute>=1.10", "pypandoc>=1.4"],
+    install_requires=["panflute>=2.0"],
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    extras_require={"dev": ["check-manifest"], "test": ["coverage"]},
+    extras_require={
+        "dev": ["check-manifest"],
+        "test": ["pytest-cov", "black", "pylint"],
+    },
     # packages=find_packages(),
     # include_package_data = True,
-    setup_requires=["pytest-runner"],
-    tests_require=["pytest", "coverage"],
 )
