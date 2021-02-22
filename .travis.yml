@@ -2,18 +2,15 @@ language: python
 python:
   - "3.6"
 install:
-  - wget https://github.com/jgm/pandoc/releases/download/2.6/pandoc-2.6-1-amd64.deb
-  - sudo dpkg -i pandoc-2.6-1-amd64.deb
+  - wget https://github.com/jgm/pandoc/releases/download/2.11.4/pandoc-2.11.4-1-amd64.deb
+  - sudo dpkg -i pandoc-2.11.4-1-amd64.deb
   - pandoc -v
   - pip install -e .[test]
-  - pip install black
-  - pip install pylint
-  - pip install coverage
   - pip install coveralls
 script:
   - black --check pandoc_latex_admonition.py setup.py tests/test_admonition.py
   - pylint pandoc_latex_admonition.py setup.py
-  - coverage run -a --source=pandoc_latex_admonition setup.py test
+  - pytest --cov=pandoc_latex_admonition
 after_success:
   - coveralls
 

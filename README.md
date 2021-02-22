@@ -63,7 +63,7 @@ Make sure you have the
 
 LaTeX packages. On linux you have to install some extra libraries **before** *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu), you can install it as root using
 
-	apt-get texlive-latex-extra
+	apt-get install texlive-latex-extra
 
 [python 3.6]: https://www.python.org
 [on Windows]: https://www.python.org/downloads/windows

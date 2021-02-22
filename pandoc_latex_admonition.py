@@ -246,7 +246,6 @@ def admonition(elem, doc):
                 return add_latex(elem, environment)
 
 
-# pylint: disable=bad-continuation
 def add_latex(elem, environment):
     """
     Add LaTeX code to the element.
