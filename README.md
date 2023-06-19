@@ -3,7 +3,7 @@
 [![Python package](https://github.com/chdemko/pandoc-latex-admonition/workflows/Python%20package/badge.svg?branch=develop)](https://github.com/chdemko/pandoc-latex-admonition/actions/workflows/python-package.yml)
 [![Coveralls](https://img.shields.io/coveralls/github/chdemko/pandoc-latex-admonition/develop.svg?logo=Codecov&logoColor=white)](https://coveralls.io/github/chdemko/pandoc-latex-admonition?branch=develop)
 [![Code Climate](https://codeclimate.com/github/chdemko/pandoc-latex-admonition/badges/gpa.svg)](https://codeclimate.com/github/chdemko/pandoc-latex-admonition/)
-[![Code Beat](https://codebeat.co/badges/8430d731-6b3d-401a-a26f-1172904e8e5b)](https://codebeat.co/projects/github-com-chdemko-pandoc-latex-admonition-develop/)
+[![Code Beat](https://codebeat.co/badges/6ce21bdf-71da-4409-a74a-575987461a72)](https://codebeat.co/projects/github-com-chdemko-pandoc-latex-admonition-develop/)
 [![Codacy](https://img.shields.io/codacy/grade/443f4a26698a4ba0be5064fe9323f2a0.svg?logo=codacy&logoColor=white)](https://app.codacy.com/gh/chdemko/pandoc-latex-admonition/)
 [![CodeFactor](https://www.codefactor.io/repository/github/chdemko/pandoc-latex-admonition/badge)](https://www.codefactor.io/repository/github/chdemko/pandoc-latex-admonition)
 [![PyPI version](https://img.shields.io/pypi/v/pandoc-latex-admonition.svg?logo=Python&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
