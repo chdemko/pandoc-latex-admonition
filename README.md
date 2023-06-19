@@ -1,9 +1,10 @@
-# pandoc-latex-admonition
-[![Build Status](https://img.shields.io/travis/chdemko/pandoc-latex-admonition/develop.svg?logo=travis)](https://travis-ci.org/chdemko/pandoc-latex-admonition/branches)
+# Installation
+
+[![Python package](https://github.com/chdemko/pandoc-latex-admonition/workflows/Python%20package/badge.svg?branch=develop)](https://github.com/chdemko/pandoc-latex-admonition/actions/workflows/python-package.yml)
 [![Coveralls](https://img.shields.io/coveralls/github/chdemko/pandoc-latex-admonition/develop.svg?logo=Codecov&logoColor=white)](https://coveralls.io/github/chdemko/pandoc-latex-admonition?branch=develop)
 [![Code Climate](https://codeclimate.com/github/chdemko/pandoc-latex-admonition/badges/gpa.svg)](https://codeclimate.com/github/chdemko/pandoc-latex-admonition/)
 [![Code Beat](https://codebeat.co/badges/8430d731-6b3d-401a-a26f-1172904e8e5b)](https://codebeat.co/projects/github-com-chdemko-pandoc-latex-admonition-develop/)
-[![Codacy](https://img.shields.io/codacy/grade/443f4a26698a4ba0be5064fe9323f2a0.svg?logo=codacy&logoColor=white)](https://www.codacy.com/app/chdemko/pandoc-latex-admonition)
+[![Codacy](https://img.shields.io/codacy/grade/443f4a26698a4ba0be5064fe9323f2a0.svg?logo=codacy&logoColor=white)](https://app.codacy.com/gh/chdemko/pandoc-latex-admonition/)
 [![CodeFactor](https://www.codefactor.io/repository/github/chdemko/pandoc-latex-admonition/badge)](https://www.codefactor.io/repository/github/chdemko/pandoc-latex-admonition)
 [![PyPI version](https://img.shields.io/pypi/v/pandoc-latex-admonition.svg?logo=Python&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
 [![PyPI format](https://img.shields.io/pypi/format/pandoc-latex-admonition.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH4gwPFiYw92eBNAAAAgJJREFUeNrt3T1WwkAUgNH31Br3ogWptdAlgyvQxYgHeh0LKKxI+PHAzNyvRo8xlxl5CZKllBIaax0Rr5n53tqB3Ti3k7qPiEUpZQAAggEACAYAIBgAgGAAoG8Ey9oRAHBas9oR5NgcIDOz5TN4pjnIJiJeapwTWAFGfMR2CDRlJViUUuYAtAfgOSK+Jv5N8FbddlBGav4M7+9795jHUsqqTGtdFQIAxgE0jQCAaQCaRQDAdABNIgDgMADNIQDgcAB/EHxWjwCA4wDsvvahegQAHA+gCQQAnAagegQAnA6gagQAnAdArQhcDdx//D+ZeXvg95tHxDK21wbG2mTm/SWP38Wgcz+jMj8i4ikiVhMePrv0z3vnlO1/grS+DVoBehfuVwCAABAAAkAAqLO6nwP896Tz2ucIVgBbgAAQAAJAAAgAASAABIAAEAACQAAIADXZyfcD9P55A7W/c8oKYAsQAAJAAAgAASBzgJ5eB1sBBIAAEAACQAAIAJkDTM/9AO4HEAACQAAIAAEgANTPHMD9AFYAASAABIAAEAACQP3MAWq/H6D3OYYVwBYgAASAABAAAkDmAF5HWwEEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAXVWj/x+g988FtAIIAAEgAASAABAAaqhfB1BFkJjdTNQAAAAASUVORK5CYII=)](https://pypi.org/project/pandoc-latex-admonition/)
@@ -20,39 +21,34 @@ It uses the *tcolorbox* LaTeX package to generate admonitions and the *footnote*
 
 [pandoc]: http://pandoc.org/
 
-Documentation
--------------
-
-See the [Read the docs pages](http://pandoc-latex-admonition.readthedocs.io/en/latest/).
-
-Usage
------
-
-To apply the filter, use the following option with pandoc:
-
-    --filter pandoc-latex-admonition
-
-Installation
+Instructions
 ------------
 
-*pandoc-latex-admonition* requires [python 3.6], a programming language that comes pre-installed on linux and Mac OS X, and which is easily installed [on Windows].
+*pandoc-latex-admonition* requires [python], a programming language that comes pre-installed on linux and Mac OS X, and which is easily installed [on Windows].
 
-Install *pandoc-latex-admonition* as root using the bash command
+Install *pandoc-latex-admonition* using the bash command
 
-    pip install pandoc-latex-admonition
+~~~shell
+$ pip install pandoc-latex-admonition
+~~~
 
 To upgrade to the most recent release, use
 
-    pip install --upgrade pandoc-latex-admonition
+~~~shell
+$ pip install --upgrade pandoc-latex-admonition
+~~~
 
 To upgrade to the current code, use
 
-    pip install --upgrade --force git+https://github.com/chdemko/pandoc-latex-admonition
+~~~shell
+$ pip install --upgrade --force git+https://github.com/chdemko/pandoc-latex-admonition
+~~~
 
 `pip` is a script that downloads and installs modules from the Python Package Index, [PyPI].  It should come installed with your python distribution. If you are running linux, `pip` may be bundled separately. On a Debian-based system (including Ubuntu), you can install it as root using
 
-    apt-get update
-    apt-get install python-pip
+~~~shell
+$ sudo apt-get install python3-pip
+~~~
 
 Make sure you have the
 
@@ -63,9 +59,11 @@ Make sure you have the
 
 LaTeX packages. On linux you have to install some extra libraries **before** *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu), you can install it as root using
 
-	apt-get install texlive-latex-extra
+~~~shell
+$ sudo apt-get install texlive-latex-extra
+~~~
 
-[python 3.6]: https://www.python.org
+[python]: https://www.python.org
 [on Windows]: https://www.python.org/downloads/windows
 [PyPI]: https://pypi.org
 

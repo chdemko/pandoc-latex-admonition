@@ -1,0 +1,497 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{xcolor}
+\definecolor{aliceblue}{HTML}{F0F8FF}
+\definecolor{antiquewhite}{HTML}{FAEBD7}
+\definecolor{aqua}{HTML}{00FFFF}
+\definecolor{aquamarine}{HTML}{7FFFD4}
+\definecolor{azure}{HTML}{F0FFFF}
+\definecolor{beige}{HTML}{F5F5DC}
+\definecolor{bisque}{HTML}{FFE4C4}
+\definecolor{black}{HTML}{000000}
+\definecolor{blanchedalmond}{HTML}{FFEBCD}
+\definecolor{blue}{HTML}{0000FF}
+\definecolor{blueviolet}{HTML}{8A2BE2}
+\definecolor{brown}{HTML}{A52A2A}
+\definecolor{burlywood}{HTML}{DEB887}
+\definecolor{cadetblue}{HTML}{5F9EA0}
+\definecolor{chartreuse}{HTML}{7FFF00}
+\definecolor{chocolate}{HTML}{D2691E}
+\definecolor{coral}{HTML}{FF7F50}
+\definecolor{cornflowerblue}{HTML}{6495ED}
+\definecolor{cornsilk}{HTML}{FFF8DC}
+\definecolor{crimson}{HTML}{DC143C}
+\definecolor{cyan}{HTML}{00FFFF}
+\definecolor{darkblue}{HTML}{00008B}
+\definecolor{darkcyan}{HTML}{008B8B}
+\definecolor{darkgoldenrod}{HTML}{B8860B}
+\definecolor{darkgray}{HTML}{A9A9A9}
+\definecolor{darkgreen}{HTML}{006400}
+\definecolor{darkgrey}{HTML}{A9A9A9}
+\definecolor{darkkhaki}{HTML}{BDB76B}
+\definecolor{darkmagenta}{HTML}{8B008B}
+\definecolor{darkolivegreen}{HTML}{556B2F}
+\definecolor{darkorange}{HTML}{FF8C00}
+\definecolor{darkorchid}{HTML}{9932CC}
+\definecolor{darkred}{HTML}{8B0000}
+\definecolor{darksalmon}{HTML}{E9967A}
+\definecolor{darkseagreen}{HTML}{8FBC8F}
+\definecolor{darkslateblue}{HTML}{483D8B}
+\definecolor{darkslategray}{HTML}{2F4F4F}
+\definecolor{darkslategrey}{HTML}{2F4F4F}
+\definecolor{darkturquoise}{HTML}{00CED1}
+\definecolor{darkviolet}{HTML}{9400D3}
+\definecolor{deeppink}{HTML}{FF1493}
+\definecolor{deepskyblue}{HTML}{00BFFF}
+\definecolor{dimgray}{HTML}{696969}
+\definecolor{dimgrey}{HTML}{696969}
+\definecolor{dodgerblue}{HTML}{1E90FF}
+\definecolor{firebrick}{HTML}{B22222}
+\definecolor{floralwhite}{HTML}{FFFAF0}
+\definecolor{forestgreen}{HTML}{228B22}
+\definecolor{fuchsia}{HTML}{FF00FF}
+\definecolor{gainsboro}{HTML}{DCDCDC}
+\definecolor{ghostwhite}{HTML}{F8F8FF}
+\definecolor{gold}{HTML}{FFD700}
+\definecolor{goldenrod}{HTML}{DAA520}
+\definecolor{gray}{HTML}{808080}
+\definecolor{green}{HTML}{008000}
+\definecolor{greenyellow}{HTML}{ADFF2F}
+\definecolor{grey}{HTML}{808080}
+\definecolor{honeydew}{HTML}{F0FFF0}
+\definecolor{hotpink}{HTML}{FF69B4}
+\definecolor{indianred}{HTML}{CD5C5C}
+\definecolor{indigo}{HTML}{4B0082}
+\definecolor{ivory}{HTML}{FFFFF0}
+\definecolor{khaki}{HTML}{F0E68C}
+\definecolor{lavender}{HTML}{E6E6FA}
+\definecolor{lavenderblush}{HTML}{FFF0F5}
+\definecolor{lawngreen}{HTML}{7CFC00}
+\definecolor{lemonchiffon}{HTML}{FFFACD}
+\definecolor{lightblue}{HTML}{ADD8E6}
+\definecolor{lightcoral}{HTML}{F08080}
+\definecolor{lightcyan}{HTML}{E0FFFF}
+\definecolor{lightgoldenrodyellow}{HTML}{FAFAD2}
+\definecolor{lightgray}{HTML}{D3D3D3}
+\definecolor{lightgreen}{HTML}{90EE90}
+\definecolor{lightgrey}{HTML}{D3D3D3}
+\definecolor{lightpink}{HTML}{FFB6C1}
+\definecolor{lightsalmon}{HTML}{FFA07A}
+\definecolor{lightseagreen}{HTML}{20B2AA}
+\definecolor{lightskyblue}{HTML}{87CEFA}
+\definecolor{lightslategray}{HTML}{778899}
+\definecolor{lightslategrey}{HTML}{778899}
+\definecolor{lightsteelblue}{HTML}{B0C4DE}
+\definecolor{lightyellow}{HTML}{FFFFE0}
+\definecolor{lime}{HTML}{00FF00}
+\definecolor{limegreen}{HTML}{32CD32}
+\definecolor{linen}{HTML}{FAF0E6}
+\definecolor{magenta}{HTML}{FF00FF}
+\definecolor{maroon}{HTML}{800000}
+\definecolor{mediumaquamarine}{HTML}{66CDAA}
+\definecolor{mediumblue}{HTML}{0000CD}
+\definecolor{mediumorchid}{HTML}{BA55D3}
+\definecolor{mediumpurple}{HTML}{9370DB}
+\definecolor{mediumseagreen}{HTML}{3CB371}
+\definecolor{mediumslateblue}{HTML}{7B68EE}
+\definecolor{mediumspringgreen}{HTML}{00FA9A}
+\definecolor{mediumturquoise}{HTML}{48D1CC}
+\definecolor{mediumvioletred}{HTML}{C71585}
+\definecolor{midnightblue}{HTML}{191970}
+\definecolor{mintcream}{HTML}{F5FFFA}
+\definecolor{mistyrose}{HTML}{FFE4E1}
+\definecolor{moccasin}{HTML}{FFE4B5}
+\definecolor{navajowhite}{HTML}{FFDEAD}
+\definecolor{navy}{HTML}{000080}
+\definecolor{oldlace}{HTML}{FDF5E6}
+\definecolor{olive}{HTML}{808000}
+\definecolor{olivedrab}{HTML}{6B8E23}
+\definecolor{orange}{HTML}{FFA500}
+\definecolor{orangered}{HTML}{FF4500}
+\definecolor{orchid}{HTML}{DA70D6}
+\definecolor{palegoldenrod}{HTML}{EEE8AA}
+\definecolor{palegreen}{HTML}{98FB98}
+\definecolor{paleturquoise}{HTML}{AFEEEE}
+\definecolor{palevioletred}{HTML}{DB7093}
+\definecolor{papayawhip}{HTML}{FFEFD5}
+\definecolor{peachpuff}{HTML}{FFDAB9}
+\definecolor{peru}{HTML}{CD853F}
+\definecolor{pink}{HTML}{FFC0CB}
+\definecolor{plum}{HTML}{DDA0DD}
+\definecolor{powderblue}{HTML}{B0E0E6}
+\definecolor{purple}{HTML}{800080}
+\definecolor{red}{HTML}{FF0000}
+\definecolor{rosybrown}{HTML}{BC8F8F}
+\definecolor{royalblue}{HTML}{4169E1}
+\definecolor{saddlebrown}{HTML}{8B4513}
+\definecolor{salmon}{HTML}{FA8072}
+\definecolor{sandybrown}{HTML}{F4A460}
+\definecolor{seagreen}{HTML}{2E8B57}
+\definecolor{seashell}{HTML}{FFF5EE}
+\definecolor{sienna}{HTML}{A0522D}
+\definecolor{silver}{HTML}{C0C0C0}
+\definecolor{skyblue}{HTML}{87CEEB}
+\definecolor{slateblue}{HTML}{6A5ACD}
+\definecolor{slategray}{HTML}{708090}
+\definecolor{slategrey}{HTML}{708090}
+\definecolor{snow}{HTML}{FFFAFA}
+\definecolor{springgreen}{HTML}{00FF7F}
+\definecolor{steelblue}{HTML}{4682B4}
+\definecolor{tan}{HTML}{D2B48C}
+\definecolor{teal}{HTML}{008080}
+\definecolor{thistle}{HTML}{D8BFD8}
+\definecolor{tomato}{HTML}{FF6347}
+\definecolor{turquoise}{HTML}{40E0D0}
+\definecolor{violet}{HTML}{EE82EE}
+\definecolor{wheat}{HTML}{F5DEB3}
+\definecolor{white}{HTML}{FFFFFF}
+\definecolor{whitesmoke}{HTML}{F5F5F5}
+\definecolor{yellow}{HTML}{FFFF00}
+\definecolor{yellowgreen}{HTML}{9ACD32}
+\usepackage[most]{tcolorbox}
+
+\usepackage{ifthen}
+\provideboolean{admonitiontwoside}
+\makeatletter%
+\if@twoside%
+\setboolean{admonitiontwoside}{true}
+\else%
+\setboolean{admonitiontwoside}{false}
+\fi%
+\makeatother%
+
+\newenvironment{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+{
+    \savenotes\tcolorbox[blanker,if odd page={left=5pt,borderline west={4pt}{-4pt}{firebrick}}{right=5pt,borderline east={4pt}{-4pt}{firebrick}}]
+}
+{
+    \endtcolorbox\spewnotes
+}
+                
+
+\newenvironment{env-e5569ee4-b168-4c9c-aea2-98c9716ee01b}
+{
+    \savenotes\tcolorbox[blanker,left=5pt,borderline west={2pt}{-4pt}{black}]
+}
+{
+    \endtcolorbox\spewnotes
+}
+                
+
+\newenvironment{env-34a74b75-4401-4593-a64a-6936d97f8740}
+{
+    \tcolorbox[blanker,left=5pt,borderline west={2pt}{-4pt}{red}]
+}
+{
+    \endtcolorbox
+}
+        
+
+\newenvironment{env-35a73417-3913-4c76-87f4-077fd5f4ea4f}
+{
+    \tcolorbox[blanker,left=5pt,borderline west={2pt}{-4pt}{red}]
+}
+{
+    \endtcolorbox
+}
+        
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\frontmatter
+
+\mainmatter
+Lorem\footnote{Lorem ipsum dolor sit amet} ipsum dolor sit amet,
+consectetur adipiscing elit. In ac urna condimentum\footnote{In ac urna
+  condimentum}, posuere nibh sit amet, blandit nisi. Vivamus nec
+elementum odio. Mauris non faucibus nulla, eget tincidunt nisl. Cras
+dolor augue, condimentum in quam at, tincidunt aliquet lorem. Donec
+dolor augue, rhoncus ac mauris eget, tincidunt facilisis quam. Quisque
+iaculis, nibh malesuada molestie suscipit, ligula mauris lacinia nibh,
+eget mollis tellus ante ut sapien. Mauris tristique tellus vitae
+vestibulum eleifend. Aliquam metus nisl, hendrerit eu pellentesque sed,
+bibendum ut diam. Aliquam mollis iaculis ipsum. Nulla blandit urna
+suscipit eros ullamcorper rhoncus.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{env-e5569ee4-b168-4c9c-aea2-98c9716ee01b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\NormalTok{In ac urna condimentum, posuere nibh sit amet, blandit}
+\NormalTok{nisi. Vivamus nec elementum odio. Mauris non faucibus}
+\NormalTok{nulla, eget tincidunt nisl. Cras dolor augue,}
+\NormalTok{condimentum in quam at, tincidunt aliquet lorem. Donec}
+\NormalTok{dolor augue, rhoncus ac mauris eget, tincidunt}
+\NormalTok{facilisis quam. Quisque iaculis, nibh malesuada molestie}
+\NormalTok{suscipit, ligula mauris lacinia nibh, eget mollis tellus}
+\NormalTok{ante ut sapien. Mauris tristique tellus vitae vestibulum}
+\NormalTok{eleifend. Aliquam metus nisl, hendrerit eu pellentesque}
+\NormalTok{sed, bibendum ut diam. Aliquam mollis iaculis ipsum.}
+\NormalTok{Nulla blandit urna suscipit eros ullamcorper rhoncus.}
+\end{Highlighting}
+\end{Shaded}
+
+\end{env-e5569ee4-b168-4c9c-aea2-98c9716ee01b}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+Praesent\footnote{Praesent non fringilla leo} non fringilla leo.
+Praesent vestibulum eu purus vitae varius\footnote{Praesent vestibulum
+  eu purus vitae varius}. Nunc maximus libero urna, non pulvinar sapien
+volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac,
+fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur
+magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta
+interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec
+interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend
+eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In
+blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec
+elementum nunc.
+
+\end{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+\begin{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+Praesent\footnote{Praesent non fringilla leo} non fringilla leo.
+Praesent vestibulum eu purus vitae varius\footnote{Praesent vestibulum
+  eu purus vitae varius}. Nunc maximus libero urna, non pulvinar sapien
+volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac,
+fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur
+magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta
+interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec
+interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend
+eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In
+blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec
+elementum nunc.
+
+\end{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+\begin{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+Praesent\footnote{Praesent non fringilla leo} non fringilla leo.
+Praesent vestibulum eu purus vitae varius\footnote{Praesent vestibulum
+  eu purus vitae varius}. Nunc maximus libero urna, non pulvinar sapien
+volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac,
+fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur
+magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta
+interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec
+interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend
+eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In
+blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec
+elementum nunc.
+
+\end{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+\begin{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+Praesent\footnote{Praesent non fringilla leo} non fringilla leo.
+Praesent vestibulum eu purus vitae varius\footnote{Praesent vestibulum
+  eu purus vitae varius}. Nunc maximus libero urna, non pulvinar sapien
+volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac,
+fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur
+magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta
+interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec
+interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend
+eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In
+blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec
+elementum nunc.
+
+\end{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+\begin{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+Praesent\footnote{Praesent non fringilla leo} non fringilla leo.
+Praesent vestibulum eu purus vitae varius\footnote{Praesent vestibulum
+  eu purus vitae varius}. Nunc maximus libero urna, non pulvinar sapien
+volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac,
+fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur
+magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta
+interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec
+interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend
+eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In
+blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec
+elementum nunc.
+
+\end{env-8f08c627-1fa3-4d4d-933c-e8c841c72ea1}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{env-34a74b75-4401-4593-a64a-6936d97f8740}
+
+Praesent non fringilla leo. Praesent vestibulum eu purus vitae
+varius\footnote{Praesent vestibulum eu purus vitae varius}. Nunc maximus
+libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo
+malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod,
+malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce
+vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit
+velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus
+vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec
+molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in
+vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
+
+
+\includegraphics[width=1.04167in,height=\textheight]{Markdown-mark.svg.png}
+
+Praesent non fringilla leo.
+
+\end{env-34a74b75-4401-4593-a64a-6936d97f8740}
+
+\begin{env-35a73417-3913-4c76-87f4-077fd5f4ea4f}
+
+Praesent non fringilla leo. Praesent vestibulum eu purus vitae
+varius\footnote{Praesent vestibulum eu purus vitae varius}. Nunc maximus
+libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo
+malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod,
+malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce
+vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit
+velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus
+vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec
+molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in
+vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
+
+
+\includegraphics[width=1.04167in,height=\textheight]{Markdown-mark.svg.png}
+
+Praesent non fringilla leo.
+
+\end{env-35a73417-3913-4c76-87f4-077fd5f4ea4f}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Lorem\footnote{Lorem ipsum dolor sit amet} ipsum dolor sit amet,
+consectetur adipiscing elit. In ac urna condimentum\footnote{In ac urna
+  condimentum}, posuere nibh sit amet, blandit nisi. Vivamus nec
+elementum odio. Mauris non faucibus nulla, eget tincidunt nisl. Cras
+dolor augue, condimentum in quam at, tincidunt aliquet lorem. Donec
+dolor augue, rhoncus ac mauris eget, tincidunt facilisis quam. Quisque
+iaculis, nibh malesuada molestie suscipit, ligula mauris lacinia nibh,
+eget mollis tellus ante ut sapien. Mauris tristique tellus vitae
+vestibulum eleifend. Aliquam metus nisl, hendrerit eu pellentesque sed,
+bibendum ut diam. Aliquam mollis iaculis ipsum. Nulla blandit urna
+suscipit eros ullamcorper rhoncus.
+
+\backmatter
+\end{document}
