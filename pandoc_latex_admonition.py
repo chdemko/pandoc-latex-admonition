@@ -1,29 +1,28 @@
 #!/usr/bin/env python
 
 """
-Pandoc filter for adding admonition in LaTeX
+Pandoc filter for adding admonition in LaTeX.
 """
 
 import uuid
 
-from panflute import (
-    convert_text,
-    run_filter,
-    debug,
-    Note,
-    RawInline,
-    RawBlock,
-    Para,
-    Image,
-    MetaList,
-    MetaInlines,
+from panflute import (  # type: ignore
+    Figure,
     MetaBool,
+    MetaInlines,
+    MetaList,
+    Note,
+    RawBlock,
+    RawInline,
+    convert_text,
+    debug,
+    run_filter,
 )
 
 
 def default_environment():
     """
-    Defines the default environment
+    Get the default environment.
 
     Returns
     -------
@@ -43,7 +42,7 @@ def default_environment():
 
 def x11colors():
     """
-    Get the x11 colors
+    Get the x11 colors.
 
     Returns
     -------
@@ -204,22 +203,21 @@ def x11colors():
 # pylint: disable=inconsistent-return-statements
 def admonition(elem, doc):
     """
-    Add admonition to elem
+    Add admonition to elem.
 
     Arguments
     ---------
-        elem:
-            The current element
-        doc:
-            The pandoc document
+    elem
+        The current element
+    doc
+        The pandoc document
 
     Returns
     -------
-        The modified element
+        The modified element or None
     """
     # Is it in the right format and is it Div or a CodeBlock?
-    if doc.format in ["latex", "beamer"] and elem.tag in ["Div", "CodeBlock"]:
-
+    if doc.format in ("latex", "beamer") and elem.tag in ("Div", "CodeBlock"):
         # Is there a latex-admonition-color attribute?
         if "latex-admonition-color" in elem.attributes:
             environment = define_environment(
@@ -240,10 +238,10 @@ def admonition(elem, doc):
 
         # Loop on all fontsize definition
         for environment in doc.defined:
-
             # Are the classes correct?
             if classes >= environment["classes"]:
                 return add_latex(elem, environment)
+    return None
 
 
 def add_latex(elem, environment):
@@ -252,11 +250,11 @@ def add_latex(elem, environment):
 
     Arguments
     ---------
-        elem:
-            The current element
+    elem
+        The current element
 
-        environment:
-            The environment to add
+    environment
+        The environment to add
 
     Returns
     -------
@@ -283,19 +281,16 @@ def add_latex(elem, environment):
                 ),
                 "tex",
             )
+        return None
 
     images = []
 
     def extract_images(element, _doc):
         # Extract image which is alone with a title
-        if (
-            isinstance(element, Para)
-            and len(element.content) == 1
-            and isinstance(element.content[0], Image)
-            and bool(element.content[0].content)
-        ):
+        if isinstance(element, Figure) and len(element.content) == 1:
             images.append(element)
             return []
+        return None
 
     # The images need to be placed after the framed environment
     return [
@@ -307,12 +302,12 @@ def add_latex(elem, environment):
 
 def prepare(doc):
     """
-    Prepare the document
+    Prepare the document.
 
     Arguments
     ---------
-        doc:
-            The pandoc document
+    doc
+        The pandoc document
     """
     doc.x11colors = x11colors()
 
@@ -324,10 +319,8 @@ def prepare(doc):
     meta = doc.get_metadata("pandoc-latex-admonition")
 
     if isinstance(meta, list):
-
         # Loop on all definitions
         for definition in meta:
-
             # Verify the definition
             if (
                 isinstance(definition, dict)
@@ -362,36 +355,36 @@ def define_environment(
     key_nobreak,
 ):
     """
-    Define a new environment
+    Define a new environment.
 
     Arguments
     ---------
-        doc:
-            The pandoc document
+    doc
+        The pandoc document
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_color:
-            The color key
+    key_color
+        The color key
 
-        key_position:
-            The position key
+    key_position
+        The position key
 
-        key_linewidth:
-            The linewidth key
+    key_linewidth
+        The linewidth key
 
-        key_margin:
-            The margin key
+    key_margin
+        The margin key
 
-        key_innermargin:
-            The innermargin key
+    key_innermargin
+        The innermargin key
 
-        key_localfootnotes:
-            The localfootnotes key
+    key_localfootnotes
+        The localfootnotes key
 
-        key_nobreak:
-            The nobreak key
+    key_nobreak
+        The nobreak key
 
     Returns
     -------
@@ -411,22 +404,21 @@ def define_environment(
 
 def define_color(environment, definition, key_color, doc=None):
     """
-    Get the color
+    Define the color.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_color:
-            The color key
+    key_color
+        The color key
 
-        doc:
-            The pandoc document
-
+    doc
+        The pandoc document
     """
     if key_color in definition:
         color = str(definition[key_color]).lower()
@@ -445,18 +437,18 @@ def define_color(environment, definition, key_color, doc=None):
 
 def define_position(environment, definition, key_position):
     """
-    Get the position
+    Define the position.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_position:
-            The position key
+    key_position
+        The position key
     """
     if key_position in definition:
         environment["position"] = str(definition[key_position])
@@ -464,18 +456,18 @@ def define_position(environment, definition, key_position):
 
 def define_linewidth(environment, definition, key_linewidth):
     """
-    Get the line width
+    Define the line width.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_linewidth:
-            The linewidth key
+    key_linewidth
+        The linewidth key
     """
     if key_linewidth in definition:
         try:
@@ -497,18 +489,18 @@ def define_linewidth(environment, definition, key_linewidth):
 
 def define_margin(environment, definition, key_margin):
     """
-    Get the margin
+    Define the margin.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_margin:
-            The margin key
+    key_margin
+        The margin key
     """
     if key_margin in definition:
         try:
@@ -522,18 +514,18 @@ def define_margin(environment, definition, key_margin):
 
 def define_innermargin(environment, definition, key_innermargin):
     """
-    Get the inner margin
+    Define the inner margin.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_innermargin:
-            The inner margin key
+    key_innermargin
+        The inner margin key
     """
     if key_innermargin in definition:
         try:
@@ -547,18 +539,18 @@ def define_innermargin(environment, definition, key_innermargin):
 
 def define_localfootnotes(environment, definition, key_localfootnotes):
     """
-    Get the local footnotes
+    Define the local footnotes.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_localfootnotes:
-            The localfootnotes key
+    key_localfootnotes
+        The localfootnotes key
     """
     if key_localfootnotes in definition:
         environment["localfootnotes"] = (
@@ -568,18 +560,18 @@ def define_localfootnotes(environment, definition, key_localfootnotes):
 
 def define_nobreak(environment, definition, key_nobreak):
     """
-    Get the nobreak
+    Define the nobreak.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        definition:
-            The definition
+    definition
+        The definition
 
-        key_nobreak:
-            The nobreak key
+    key_nobreak
+        The nobreak key
     """
     if key_nobreak in definition:
         environment["nobreak"] = str(definition[key_nobreak]).lower() == "true"
@@ -587,15 +579,15 @@ def define_nobreak(environment, definition, key_nobreak):
 
 def new_environment(doc, environment):
     """
-    Create a new environment
+    Create a new environment.
 
     Arguments
     ---------
-        doc:
-            The pandoc document
+    doc
+        The pandoc document
 
-        environment:
-            The environment
+    environment
+        The environment
 
     Returns
     -------
@@ -611,50 +603,44 @@ def new_environment(doc, environment):
         options.append(right_bar(environment))
     elif environment["position"] == "inner":
         options.append(
-            "if odd page={%s}{%s}" % (left_bar(environment), right_bar(environment))
+            f"if odd page={{{left_bar(environment)}}}{{{right_bar(environment)}}}"
         )
     elif environment["position"] == "outer":
         options.append(
-            "if odd page={%s}{%s}" % (right_bar(environment), left_bar(environment))
+            f"if odd page={{{right_bar(environment)}}}{{{left_bar(environment)}}}"
         )
     else:
         options.append(left_bar(environment))
 
     if environment["localfootnotes"] or doc.format == "beamer":
-        return r"""
-\newenvironment{%s}
-{
-    \tcolorbox[%s]
-}
-{
-    \endtcolorbox
-}
-        """ % (
-            environment["env"],
-            ",".join(options),
-        )
-    return r"""
-\newenvironment{%s}
-{
-    \savenotes\tcolorbox[%s]
-}
-{
-    \endtcolorbox\spewnotes
-}
-                """ % (
-        environment["env"],
-        ",".join(options),
-    )
+        return f"""
+\\newenvironment{{{environment['env']}}}
+{{
+    \\tcolorbox[{','.join(options)}]
+}}
+{{
+    \\endtcolorbox
+}}
+        """
+    return f"""
+\\newenvironment{{{environment['env']}}}
+{{
+    \\savenotes\\tcolorbox[{','.join(options)}]
+}}
+{{
+    \\endtcolorbox\\spewnotes
+}}
+        """
 
 
 def left_bar(environment):
     """
-    Generates a left bar
+    Generate a left bar.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
     Returns
     -------
@@ -665,12 +651,12 @@ def left_bar(environment):
 
 def right_bar(environment):
     """
-    Generates a right bar
+    Generate a right bar.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
     Returns
     -------
@@ -682,41 +668,38 @@ def right_bar(environment):
 # pylint: disable=blacklisted-name
 def bar(environment, position, localization):
     """
-    Generates a bar
+    Generate a bar.
 
     Arguments
     ---------
-        environment:
-            The environment
+    environment
+        The environment
 
-        position:
-            left or right
+    position
+        left or right
 
-        localization:
-            east or west
+    localization
+        east or west
 
     Returns
     -------
         The bar options
     """
-    return "%s=%gpt,borderline %s={%gpt}{%gpt}{%s}" % (
-        position,
-        environment["innermargin"],
-        localization,
-        environment["linewidth"],
-        environment["margin"],
-        environment["color"],
+    return (
+        f"{position}={environment['innermargin']:g}pt,borderline "
+        f"{localization}={{{environment['linewidth']:g}pt}}"
+        f"{{{environment['margin']:g}pt}}{{{environment['color']}}}"
     )
 
 
 def finalize(doc):
     """
-    Finalize the pandoc document
+    Finalize the pandoc document.
 
     Arguments
     ---------
-        doc:
-            The pandoc document
+    doc
+        The pandoc document
     """
     # load footnote or footnotehyper package
     if doc.format == "latex":
@@ -729,15 +712,16 @@ def finalize(doc):
     elif not isinstance(doc.metadata["header-includes"], MetaList):
         doc.metadata["header-includes"] = MetaList(doc.metadata["header-includes"])
 
-    # Add usefull LaTexPackage
+    # Add useful LaTexPackage
     doc.metadata["header-includes"].append(
         MetaInlines(RawInline("\\usepackage{xcolor}", "tex"))
     )
 
     # Define x11 colors
-    tex = []
-    for name, color in doc.x11colors.items():
-        tex.append("\\definecolor{" + name.lower() + "}{HTML}{" + color + "}")
+    tex = [
+        f"\\definecolor{{{name.lower()}}}{{HTML}}{{{color}}}"
+        for name, color in doc.x11colors.items()
+    ]
     doc.metadata["header-includes"].append(
         MetaInlines(RawInline("\n".join(tex), "tex"))
     )
@@ -771,12 +755,12 @@ def finalize(doc):
 
 def main(doc=None):
     """
-    Main function called by the script.
+    Convert the pandoc document.
 
     Arguments
     ---------
-        doc:
-            The pandoc document
+    doc
+        The pandoc document
 
     Returns
     -------

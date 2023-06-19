@@ -46,7 +46,18 @@ Nulla blandit urna suscipit eros ullamcorper rhoncus.
 ---
 
 ::: {.admonition .danger} :::
-Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+Praesent[^praesent] non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 
 [^praesent]: Praesent non fringilla leo
 [^varius]: Praesent vestibulum eu purus vitae varius
@@ -54,25 +65,83 @@ Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius
 :::::::::::::::::::::::::::::
 
 ::: {.admonition .danger} :::
-Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+Praesent[^praesent] non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 :::::::::::::::::::::::::::::
 
 ::: {.admonition .danger} :::
-Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+Praesent[^praesent] non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 :::::::::::::::::::::::::::::
 
 ::: {.admonition .danger} :::
-Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+Praesent[^praesent] non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 :::::::::::::::::::::::::::::
 
 ::: {.admonition .danger} :::
-Praesent[^praesent] non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+Praesent[^praesent] non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 :::::::::::::::::::::::::::::
 
 ---
 
-::: {latex-admonition-color=red latex-admonition-localfootnotes=true latex-admonition-nobreak=true} :::
-Praesent non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius2]. Nunc maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+::: {
+  latex-admonition-color=red
+  latex-admonition-localfootnotes=true
+  latex-admonition-nobreak=true} :::
+Praesent non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius2].
+Nunc maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum,
+nisi urna mollis nisl, id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 
 [^varius2]: Praesent vestibulum eu purus vitae varius
 
@@ -84,9 +153,23 @@ Praesent non fringilla leo.
 
 ::::::::::::::::::::::::::::::::::::
 
-::: {latex-admonition-color=red latex-admonition-localfootnotes=true latex-admonition-nobreak=true} :::
-Praesent non fringilla leo. Praesent vestibulum eu purus vitae varius[^varius3]. Nunc
-maximus libero urna, non pulvinar sapien volutpat sit amet. Donec sit amet leo malesuada, euismod augue ac, fermentum sapien. Donec vel nulla euismod, malesuada leo id, efficitur magna. Praesent sed faucibus ipsum. Fusce vestibulum, odio in porta interdum, nisi urna mollis nisl, id hendrerit velit metus eu libero. Duis bibendum quam metus, eget ultricies lacus vulputate eget. Donec interdum vulputate nisi quis dapibus. Donec molestie, metus a eleifend eleifend, urna ipsum rutrum metus, in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit. Vestibulum quis placerat nisi, nec elementum nunc.
+::: {
+  latex-admonition-color=red
+  latex-admonition-localfootnotes=true
+  latex-admonition-nobreak=true} :::
+Praesent non fringilla leo.
+Praesent vestibulum eu purus vitae varius[^varius3]. Nunc
+maximus libero urna, non pulvinar sapien volutpat sit amet.
+Donec sit amet leo malesuada, euismod augue ac, fermentum sapien.
+Donec vel nulla euismod, malesuada leo id, efficitur magna.
+Praesent sed faucibus ipsum. Fusce vestibulum,
+odio in porta interdum, nisi urna mollis nisl,
+id hendrerit velit metus eu libero.
+Duis bibendum quam metus, eget ultricies lacus vulputate eget.
+Donec interdum vulputate nisi quis dapibus. Donec molestie,
+metus a eleifend eleifend, urna ipsum rutrum metus,
+in vulputate nibh risus nec nibh. In blandit odio vel sem semper blandit.
+Vestibulum quis placerat nisi, nec elementum nunc.
 
 [^varius3]: Praesent vestibulum eu purus vitae varius
 

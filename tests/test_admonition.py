@@ -2,12 +2,12 @@
 
 from unittest import TestCase
 
-from panflute import convert_text, Para, Image
+from panflute import convert_text, Para, Image, Figure
 
 import pandoc_latex_admonition
 
 
-class TipTest(TestCase):
+class AdmonitionTest(TestCase):
     @classmethod
     def conversion(cls, markdown, fmt="markdown"):
         doc = convert_text(markdown, standalone=True)
@@ -16,7 +16,7 @@ class TipTest(TestCase):
         return doc
 
     def test_codeblock_classes(self):
-        doc = TipTest.conversion(
+        doc = AdmonitionTest.conversion(
             """
 ---
 pandoc-latex-admonition:
@@ -45,7 +45,7 @@ pandoc-latex-admonition:
         )
 
     def test_codeblock_attributes(self):
-        doc = TipTest.conversion(
+        doc = AdmonitionTest.conversion(
             """
 ::: {latex-admonition-color=xyz latex-admonition-linewidth=xyz' latex-admonition-margin=xyz latex-admonition-innermargin=xyz latex-admonition-localfootnotes=true} :::
 :::::::::
@@ -66,7 +66,7 @@ pandoc-latex-admonition:
         )
 
     def test_latex_images(self):
-        doc = TipTest.conversion(
+        doc = AdmonitionTest.conversion(
             """
 ::: {latex-admonition-color=black} :::
 
@@ -74,7 +74,7 @@ pandoc-latex-admonition:
 
 Hello
 :::::::::
-            """,
+            """.strip(),
             "latex",
         )
         text = convert_text(
@@ -90,11 +90,10 @@ Hello
             r"\tcolorbox[blanker,breakable,left=5pt,borderline west={2pt}{-4pt}{black}]",
             doc.get_metadata()["header-includes"][-1],
         )
-        self.assertTrue(isinstance(doc.content[-1], Para))
-        self.assertTrue(isinstance(doc.content[-1].content[0], Image))
+        self.assertIsInstance(doc.content[-1], Figure)
 
     def test_beamer_notes(self):
-        doc = TipTest.conversion(
+        doc = AdmonitionTest.conversion(
             """
 ::: {latex-admonition-color=black} :::
 
