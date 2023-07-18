@@ -21,6 +21,11 @@ Installation
 [![Code Size](https://img.shields.io/github/languages/code-size/chdemko/pandoc-latex-admonition.svg)](http://pandoc-latex-admonition.readthedocs.io/en/latest/)
 [![Source Rank](https://img.shields.io/librariesio/sourcerank/pypi/pandoc-latex-admonition.svg?logo=koding&logoColor=white)](https://libraries.io/pypi/pandoc-latex-admonition)
 
+license icon by [Daniel Bruce](https://www.iconfinder.com/icons/216659/license_icon),
+format icon by [Picol](https://www.iconfinder.com/icons/103509/document_text_icon),
+status icon by [Just Icon](https://www.iconfinder.com/icons/2672768/app_battery_essential_object_status_ui_ux_icon),
+code style icon by [Google Material Design icons](https://www.iconfinder.com/icons/352148/style_icon)
+
 *pandoc-latex-admonition* is a [pandoc] filter for adding admonition to `div`s or `codeblock`s elements.
 
 It uses the *tcolorbox* LaTeX package to generate admonitions and the *footnote* LaTeX package to handle correctly footnotes in admonition.
