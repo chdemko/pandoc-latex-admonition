@@ -67,7 +67,7 @@ pandoc-latex-admonition:
 
     def test_latex_images(self):
         doc = AdmonitionTest.conversion(
-            """
+            """\
 ::: {latex-admonition-color=black} :::
 
 ![Title]()
