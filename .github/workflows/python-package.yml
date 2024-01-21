@@ -44,7 +44,7 @@ jobs:
         poetry-version: [1.2.2, 1.3.2, 1.4.2, 1.5.1, 1.6.1, 1.7.1]
         pandoc-version: [3.1.11.1]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -70,7 +70,7 @@ jobs:
         poetry-version: [1.7.1]
         pandoc-version: [3.0.1, 3.1.11.1]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -91,7 +91,7 @@ jobs:
   style:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -111,7 +111,7 @@ jobs:
   cov:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
