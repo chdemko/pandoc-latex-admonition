@@ -6,7 +6,7 @@ Pandoc filter for adding admonition in LaTeX.
 
 import uuid
 
-from panflute import (  # type: ignore
+from panflute import (
     Figure,
     MetaBool,
     MetaInlines,
