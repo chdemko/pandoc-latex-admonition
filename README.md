@@ -44,7 +44,7 @@ $ pipx install pandoc-latex-admonition
 To upgrade to the most recent release, use
 
 ~~~shell
-$ pipx install --upgrade pandoc-latex-admonition
+$ pipx upgrade pandoc-latex-admonition
 ~~~
 
 `pipx` is a script to install and run python applications in isolated environments from the Python Package Index, [PyPI]. It can be installed using instructions given [here](https://pipx.pypa.io/stable/).
