@@ -96,6 +96,7 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 Sphinx = "^7.2.6"
 sphinx-rtd-theme = "^2.0.0"
+myst-parser = "^2.0"
 
 [tool.flake8]
 # flake8-docstrings
