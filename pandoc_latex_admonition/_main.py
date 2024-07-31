@@ -5,8 +5,11 @@ Pandoc filter for adding admonition in LaTeX.
 """
 
 import uuid
+from typing import Any
 
 from panflute import (
+    Doc,
+    Element,
     Figure,
     MetaBool,
     MetaInlines,
@@ -20,12 +23,13 @@ from panflute import (
 )
 
 
-def default_environment():
+def default_environment() -> dict[str, Any]:
     """
     Get the default environment.
 
     Returns
     -------
+    dict[str, Any]
         The default environment
     """
     return {
@@ -201,7 +205,7 @@ def x11colors():
 
 
 # pylint: disable=inconsistent-return-statements
-def admonition(elem, doc):
+def admonition(elem: Element, doc: Doc) -> Element | None:
     """
     Add admonition to elem.
 
@@ -214,6 +218,7 @@ def admonition(elem, doc):
 
     Returns
     -------
+    Element | None
         The modified element or None
     """
     # Is it in the right format and is it Div or a CodeBlock?
@@ -244,7 +249,7 @@ def admonition(elem, doc):
     return None
 
 
-def add_latex(elem, environment):
+def add_latex(elem: Element, environment: dict[str, Any]) -> Element | None:
     """
     Add LaTeX code to the element.
 
@@ -258,6 +263,7 @@ def add_latex(elem, environment):
 
     Returns
     -------
+    Element | None
         The modified element
     """
 
@@ -300,7 +306,7 @@ def add_latex(elem, environment):
     ] + images
 
 
-def prepare(doc):
+def prepare(doc: Doc) -> None:
     """
     Prepare the document.
 
@@ -344,16 +350,16 @@ def prepare(doc):
 
 # pylint: disable=too-many-arguments,too-many-function-args
 def define_environment(
-    doc,
-    definition,
-    key_color,
-    key_position,
-    key_linewidth,
-    key_margin,
-    key_innermargin,
-    key_localfootnotes,
-    key_nobreak,
-):
+    doc: Doc,
+    definition: dict[str, str],
+    key_color: str,
+    key_position: str,
+    key_linewidth: str,
+    key_margin: str,
+    key_innermargin: str,
+    key_localfootnotes: str,
+    key_nobreak: str,
+) -> dict[str, Any]:
     """
     Define a new environment.
 
@@ -388,6 +394,7 @@ def define_environment(
 
     Returns
     -------
+    dict[str, Any]
         A new environment
     """
     # Get the default environment
@@ -402,7 +409,9 @@ def define_environment(
     return environment
 
 
-def define_color(environment, definition, key_color, doc=None):
+def define_color(
+    environment: dict[str, Any], definition: dict[str, str], key_color: str, doc: Doc
+):
     """
     Define the color.
 
@@ -421,7 +430,7 @@ def define_color(environment, definition, key_color, doc=None):
         The pandoc document
     """
     if key_color in definition:
-        color = str(definition[key_color]).lower()
+        color = definition[key_color].lower()
         if color in doc.x11colors:
             environment["color"] = color
         else:
@@ -435,7 +444,9 @@ def define_color(environment, definition, key_color, doc=None):
             )
 
 
-def define_position(environment, definition, key_position):
+def define_position(
+    environment: dict[str, Any], definition: dict[str, str], key_position: str
+) -> None:
     """
     Define the position.
 
@@ -451,10 +462,12 @@ def define_position(environment, definition, key_position):
         The position key
     """
     if key_position in definition:
-        environment["position"] = str(definition[key_position])
+        environment["position"] = definition[key_position]
 
 
-def define_linewidth(environment, definition, key_linewidth):
+def define_linewidth(
+    environment: dict[str, Any], definition: dict[str, str], key_linewidth: str
+) -> None:
     """
     Define the line width.
 
@@ -471,7 +484,7 @@ def define_linewidth(environment, definition, key_linewidth):
     """
     if key_linewidth in definition:
         try:
-            linewidth = int(str(definition[key_linewidth]))
+            linewidth = int(definition[key_linewidth])
             if linewidth <= 0:
                 debug(
                     "[WARNING] pandoc-latex-admonition: "
@@ -487,7 +500,9 @@ def define_linewidth(environment, definition, key_linewidth):
             )
 
 
-def define_margin(environment, definition, key_margin):
+def define_margin(
+    environment: dict[str, Any], definition: dict[str, str], key_margin: str
+) -> None:
     """
     Define the margin.
 
@@ -504,7 +519,7 @@ def define_margin(environment, definition, key_margin):
     """
     if key_margin in definition:
         try:
-            environment["margin"] = int(str(definition[key_margin]))
+            environment["margin"] = int(definition[key_margin])
         except ValueError:
             debug(
                 "[WARNING] pandoc-latex-admonition: margin is not a valid; using "
@@ -512,7 +527,9 @@ def define_margin(environment, definition, key_margin):
             )
 
 
-def define_innermargin(environment, definition, key_innermargin):
+def define_innermargin(
+    environment: dict[str, Any], definition: dict[str, str], key_innermargin: str
+) -> None:
     """
     Define the inner margin.
 
@@ -529,7 +546,7 @@ def define_innermargin(environment, definition, key_innermargin):
     """
     if key_innermargin in definition:
         try:
-            environment["innermargin"] = int(str(definition[key_innermargin]))
+            environment["innermargin"] = int(definition[key_innermargin])
         except ValueError:
             debug(
                 "[WARNING] pandoc-latex-admonition: innermargin is not a valid; using "
@@ -537,7 +554,9 @@ def define_innermargin(environment, definition, key_innermargin):
             )
 
 
-def define_localfootnotes(environment, definition, key_localfootnotes):
+def define_localfootnotes(
+    environment: dict[str, Any], definition: dict[str, str], key_localfootnotes: str
+) -> None:
     """
     Define the local footnotes.
 
@@ -553,12 +572,12 @@ def define_localfootnotes(environment, definition, key_localfootnotes):
         The localfootnotes key
     """
     if key_localfootnotes in definition:
-        environment["localfootnotes"] = (
-            str(definition[key_localfootnotes]).lower() == "true"
-        )
+        environment["localfootnotes"] = definition[key_localfootnotes].lower() == "true"
 
 
-def define_nobreak(environment, definition, key_nobreak):
+def define_nobreak(
+    environment: dict[str, Any], definition: dict[str, str], key_nobreak: str
+) -> None:
     """
     Define the nobreak.
 
@@ -574,10 +593,10 @@ def define_nobreak(environment, definition, key_nobreak):
         The nobreak key
     """
     if key_nobreak in definition:
-        environment["nobreak"] = str(definition[key_nobreak]).lower() == "true"
+        environment["nobreak"] = definition[key_nobreak].lower() == "true"
 
 
-def new_environment(doc, environment):
+def new_environment(doc: Doc, environment: dict[str, Any]) -> str:
     """
     Create a new environment.
 
@@ -591,6 +610,7 @@ def new_environment(doc, environment):
 
     Returns
     -------
+    str
         The LaTeX environment
     """
     options = ["blanker"]
@@ -633,7 +653,7 @@ def new_environment(doc, environment):
         """
 
 
-def left_bar(environment):
+def left_bar(environment: dict[str, Any]) -> str:
     """
     Generate a left bar.
 
@@ -644,12 +664,13 @@ def left_bar(environment):
 
     Returns
     -------
+    str
         The left bar options
     """
     return bar(environment, "left", "west")
 
 
-def right_bar(environment):
+def right_bar(environment: dict[str, Any]) -> str:
     """
     Generate a right bar.
 
@@ -660,13 +681,14 @@ def right_bar(environment):
 
     Returns
     -------
+    str
         The right bar options
     """
     return bar(environment, "right", "east")
 
 
 # pylint: disable=blacklisted-name
-def bar(environment, position, localization):
+def bar(environment: dict[str, Any], position: str, localization: str) -> str:
     """
     Generate a bar.
 
@@ -683,6 +705,7 @@ def bar(environment, position, localization):
 
     Returns
     -------
+    str
         The bar options
     """
     return (
@@ -692,7 +715,7 @@ def bar(environment, position, localization):
     )
 
 
-def finalize(doc):
+def finalize(doc: Doc) -> None:
     """
     Finalize the pandoc document.
 
@@ -753,7 +776,7 @@ def finalize(doc):
         )
 
 
-def main(doc=None):
+def main(doc: Doc | None = None) -> Doc:
     """
     Convert the pandoc document.
 
@@ -764,6 +787,7 @@ def main(doc=None):
 
     Returns
     -------
+    Doc
         The modified pandoc document
     """
     return run_filter(admonition, prepare=prepare, finalize=finalize, doc=doc)
