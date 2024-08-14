@@ -3,9 +3,9 @@ Usage
 
 To apply the filter, use the following option with pandoc:
 
-.. code-block:: shell
+.. prompt:: bash
 
-    $ pandoc --filter pandoc-latex-admonition
+    pandoc --filter pandoc-latex-admonition
 
 Explanation
 -----------
