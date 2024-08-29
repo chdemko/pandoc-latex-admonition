@@ -42,14 +42,14 @@ comes pre-installed on linux and Mac OS X, and which is easily installed
 
 Install *pandoc-latex-admonition* using the bash command
 
-~~~{prompt} bash
-pipx install pandoc-latex-admonition
+~~~shell-session
+$ pipx install pandoc-latex-admonition
 ~~~
 
 To upgrade to the most recent release, use
 
-~~~{prompt} bash
-pipx upgrade pandoc-latex-admonition
+~~~shell-session
+$ pipx upgrade pandoc-latex-admonition
 ~~~
 
 `pipx` is a script to install and run python applications in isolated environments from the Python Package Index, [PyPI]. It can be installed using instructions given [here](https://pipx.pypa.io/stable/).
@@ -65,8 +65,8 @@ LaTeX packages. On linux you have to install some extra libraries **before**
 *pandoc-latex-admonition*. On a Debian-based system (including Ubuntu),
 you can install it as root using
 
-~~~{prompt} bash
-sudo apt-get install texlive-latex-extra
+~~~shell-session
+$ sudo apt-get install texlive-latex-extra
 ~~~
 
 [python]: https://www.python.org
