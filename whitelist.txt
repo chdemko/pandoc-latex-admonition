@@ -2,6 +2,14 @@ cov
 pylint
 unsubscriptable
 toplevel
-fontsize
+platformdirs
+minipage
+codeblock
+unexisting
+fontawesome
+glyphicons
+decrementing
+noinspection
 x11
 footnotehyper
+

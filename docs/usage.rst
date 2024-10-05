@@ -3,7 +3,7 @@ Usage
 
 To apply the filter, use the following option with pandoc:
 
-.. code-block:: shell
+.. code-block:: shell-session
 
     $ pandoc --filter pandoc-latex-admonition
 
