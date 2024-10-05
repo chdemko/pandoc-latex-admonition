@@ -645,9 +645,9 @@ def new_environment(doc: Doc, environment: dict[str, Any]) -> str:
     return f"""
 \\newenvironment{{{environment['env']}}}
 {{
+    \\savenotes\\tcolorbox[{','.join(options)}]
     \\setcounter{{mpfootnote}}{{\\value{{footnote}}}}
     \\renewcommand\\thempfootnote{{\\arabic{{mpfootnote}}}}
-    \\savenotes\\tcolorbox[{','.join(options)}]
 }}
 {{
     \\endtcolorbox\\spewnotes
