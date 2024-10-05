@@ -241,7 +241,7 @@ def admonition(elem: Element, doc: Doc) -> Element | None:
         # Get the classes
         classes = set(elem.classes)
 
-        # Loop on all fontsize definition
+        # Loop on all font size definition
         for environment in doc.defined:
             # Are the classes correct?
             if classes >= environment["classes"]:
@@ -348,7 +348,7 @@ def prepare(doc: Doc) -> None:
                 doc.defined.append(environment)
 
 
-# pylint: disable=too-many-arguments,too-many-function-args
+# pylint: disable=too-many-arguments,too-many-positional-arguments
 def define_environment(
     doc: Doc,
     definition: dict[str, str],
@@ -645,6 +645,8 @@ def new_environment(doc: Doc, environment: dict[str, Any]) -> str:
     return f"""
 \\newenvironment{{{environment['env']}}}
 {{
+    \\setcounter{{mpfootnote}}{{\\value{{footnote}}}}
+    \\renewcommand\\thempfootnote{{\\arabic{{mpfootnote}}}}
     \\savenotes\\tcolorbox[{','.join(options)}]
 }}
 {{
@@ -724,7 +726,7 @@ def finalize(doc: Doc) -> None:
     doc
         The pandoc document
     """
-    # load footnote or footnotehyper package
+    # load 'footnote' or 'footnotehyper' package
     if doc.format == "latex":
         doc.metadata["tables"] = MetaBool(True)
 

@@ -1,7 +1,0 @@
-cov
-pylint
-unsubscriptable
-toplevel
-fontsize
-x11
-footnotehyper

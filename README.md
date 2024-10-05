@@ -2,6 +2,7 @@ Installation
 ============
 
 [![Python package](https://github.com/chdemko/pandoc-latex-admonition/workflows/Python%20package/badge.svg?branch=develop)](https://github.com/chdemko/pandoc-latex-admonition/actions/workflows/python-package.yml)
+[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://pypi.org/project/black/)
 [![Coveralls](https://img.shields.io/coveralls/github/chdemko/pandoc-latex-admonition/develop.svg?logo=Codecov&logoColor=white)](https://coveralls.io/github/chdemko/pandoc-latex-admonition?branch=develop)
@@ -15,8 +16,7 @@ Installation
 [![Downloads](https://img.shields.io/pypi/dm/pandoc-latex-admonition?logo=pypi&logoColor=white)](https://pepy.tech/project/pandoc-latex-admonition)
 [![Development Status](https://img.shields.io/pypi/status/pandoc-latex-admonition.svg?llogo=pypi&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
 [![Python version](https://img.shields.io/pypi/pyversions/pandoc-latex-admonition.svg?logo=Python&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
-[![Poetry version](https://img.shields.io/badge/poetry-1.2%20|%201.3%20|%201.4%20|%201.5%20|%201.6%20|%201.7%20|%201.8-blue.svg?logo=poetry)](https://python-poetry.org/)
-[![Pandoc version](https://img.shields.io/badge/pandoc-3.0%20|%203.1%20|%203.2%20|%203.3-blue.svg?logo=markdown)](https://pandoc.org/)
+[![Pandoc version](https://img.shields.io/badge/pandoc-3.0%20|%203.1%20|%203.2%20|%203.3%20|%203.4-blue.svg?logo=markdown)](https://pandoc.org/)
 [![Latest release](https://img.shields.io/github/release-date/chdemko/pandoc-latex-admonition.svg?logo=github)](https://github.com/chdemko/pandoc-latex-admonition/releases)
 [![Last commit](https://img.shields.io/github/last-commit/chdemko/pandoc-latex-admonition/develop?logo=github)](https://github.com/chdemko/pandoc-latex-admonition/commit/develop/)
 [![Repo Size](https://img.shields.io/github/repo-size/chdemko/pandoc-latex-admonition.svg?logo=github)](http://pandoc-latex-admonition.readthedocs.io/en/latest/)
