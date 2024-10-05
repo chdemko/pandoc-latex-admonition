@@ -650,6 +650,7 @@ def new_environment(doc: Doc, environment: dict[str, Any]) -> str:
     \\renewcommand\\thempfootnote{{\\arabic{{mpfootnote}}}}
 }}
 {{
+    \\setcounter{{footnote}}{{\\value{{mpfootnote}}}}
     \\endtcolorbox\\spewnotes
 }}
         """
