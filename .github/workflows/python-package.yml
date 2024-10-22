@@ -77,7 +77,7 @@ jobs:
         hatch fmt --check
     - name: Dynamic check
       run: |
-        hatch run dynamic-lint:check
+        hatch run lint:check
 
   cov:
     runs-on: ubuntu-latest
