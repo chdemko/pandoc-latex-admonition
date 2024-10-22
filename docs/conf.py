@@ -29,7 +29,7 @@ with open("../pyproject.toml", "rb") as f:
     author = ",".join(author["name"] for author in data["project"]["authors"])
 release = os.popen("hatch version").readline().strip()  # noqa: S605, S607
 year = datetime.datetime.now(tz=datetime.UTC).date().year
-copyright = f"2016-{year}, {author}"  # noqa: A001
+copyright = f"2017-{year}, {author}"  # noqa: A001
 
 # The short X.Y version
 version = ".".join(release.split(".")[:2])
