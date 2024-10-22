@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: check-toml
   - id: check-yaml
@@ -14,7 +14,7 @@ repos:
     args: [--autofix]
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.17.0
+  rev: v3.18.0
   hooks:
   - id: pyupgrade
     args: [--py310-plus]
@@ -26,9 +26,9 @@ repos:
     entry: hatch fmt --check
     language: system
     pass_filenames: false
-  - id: dynamic-lint
-    name: dynamic-lint
-    entry: hatch run dynamic-lint:check
+  - id: lint
+    name: lint
+    entry: hatch run lint:check
     language: system
     pass_filenames: false
   - id: test
@@ -36,4 +36,8 @@ repos:
     entry: hatch test
     language: system
     pass_filenames: false
-
+  - id: lock
+    name: lock
+    entry: uv lock --upgrade
+    language: system
+    pass_filenames: false

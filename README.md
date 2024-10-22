@@ -16,7 +16,7 @@ Installation
 [![Downloads](https://img.shields.io/pypi/dm/pandoc-latex-admonition?logo=pypi&logoColor=white)](https://pepy.tech/project/pandoc-latex-admonition)
 [![Development Status](https://img.shields.io/pypi/status/pandoc-latex-admonition.svg?llogo=pypi&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
 [![Python version](https://img.shields.io/pypi/pyversions/pandoc-latex-admonition.svg?logo=Python&logoColor=white)](https://pypi.org/project/pandoc-latex-admonition/)
-[![Pandoc version](https://img.shields.io/badge/pandoc-3.0%20|%203.1%20|%203.2%20|%203.3%20|%203.4-blue.svg?logo=markdown)](https://pandoc.org/)
+[![Pandoc version](https://img.shields.io/badge/pandoc-3.0%20|%203.1%20|%203.2%20|%203.3%20|%203.4%20|%203.5-blue.svg?logo=markdown)](https://pandoc.org/)
 [![Latest release](https://img.shields.io/github/release-date/chdemko/pandoc-latex-admonition.svg?logo=github)](https://github.com/chdemko/pandoc-latex-admonition/releases)
 [![Last commit](https://img.shields.io/github/last-commit/chdemko/pandoc-latex-admonition/develop?logo=github)](https://github.com/chdemko/pandoc-latex-admonition/commit/develop/)
 [![Repo Size](https://img.shields.io/github/repo-size/chdemko/pandoc-latex-admonition.svg?logo=github)](http://pandoc-latex-admonition.readthedocs.io/en/latest/)
@@ -81,4 +81,35 @@ If you have any difficulties with pandoc-latex-admonition, please feel
 welcome to [file an issue] on github so that we can help.
 
 [file an issue]: https://github.com/chdemko/pandoc-latex-admonition/issues
+
+Contribute
+==========
+
+Instructions
+------------
+
+Install `hatch`, then run
+
+~~~shell-session
+$ hatch run pip install pre-commit
+$ hatch run pre-commit install
+~~~
+
+to install `pre-commit` before working on your changes.
+
+Tests
+-----
+
+When your changes are ready, run
+
+~~~shell-session
+$ hatch test
+$ hatch fmt --check
+$ hatch run lint:check
+$ hatch run docs:build
+$ hatch build -t wheel
+~~~
+
+for running the tests, checking the style, building the documentation
+and building the wheel.
 

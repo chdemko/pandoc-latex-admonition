@@ -7,7 +7,7 @@ dynamic = ["version"]
 name = "pandoc-latex-admonition"
 description = "A pandoc filter for adding admonition in LaTeX"
 readme = "README.md"
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.10,<3.14"
 license = {text = "BSD-3-Clause"}
 license-files = {paths = ["LICENSE"]}
 authors = [{name = "Christophe Demko", email = "chdemko@gmail.com"}]
@@ -34,6 +34,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.14",
   # Natural language used
   "Natural Language :: English"
 ]
@@ -58,20 +59,20 @@ version_scheme = "no-guess-dev"
 local_scheme = "node-and-date"
 
 [tool.hatch.build.targets.wheel]
-packages = ["pandoc_latex_admonition"]
+packages = ["src/pandoc_latex_admonition"]
 
 [[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.10", "3.11", "3.12"]
+python = ["3.10", "3.11", "3.12", "3.13"]
 
 [tool.hatch.envs.hatch-static-analysis]
 dependencies = [
   # Types
   "types-PyYAML~=6.0",
   # Formatter
-  "black[jupyter]~=24.8",
+  "black[jupyter]~=24.10",
   # Style checkers
   "doc8~=1.1",
-  "mypy~=1.11",
+  "mypy~=1.12",
   "flake8~=7.1",
   "flake8-pyproject~=1.2",
   "flake8-annotations-complexity~=0.0",
@@ -87,65 +88,70 @@ dependencies = [
   "flake8-functions~=0.0",
   "flake8-import-order~=0.18",
   "flake8-mypy~=17.8",
-  "flake8-pyi~=24.6",
+  "flake8-pyi~=24.9",
   "flake8-pydocstyle~=0.2",
   "flake8-return~=1.2",
   "flake8-simplify~=0.21",
   "flake8-spellcheck~=0.28",
   "flake8-use-fstring~=1.4",
   "flake8-variables-names~=0.0",
-  "pep8-naming~=0.13",
+  "pep8-naming~=0.14",
   "darglint~=1.8.1",
   "pydoclint[flake8]~=0.5",
   "teyit~=0.4",
   "refurb~=2.0",
-  "ruff~=0.6"
+  "ruff~=0.7"
 ]
 
 [tool.hatch.envs.hatch-static-analysis.scripts]
 format-check = [
-  "black --check --diff {args:pandoc_latex_admonition docs}",
+  "black --check --diff {args:src docs}",
   "doc8 -q {args:docs README.md} -e .rst -e .md"
 ]
 format-fix = [
-  "black {args:pandoc_latex_admonition docs}"
+  "black {args:src docs}"
 ]
 lint-check = [
-  "refurb {args:pandoc_latex_admonition docs}",
-  "ruff check {args:pandoc_latex_admonition docs}",
+  "refurb {args:src docs}",
+  "ruff check {args:src docs}",
   "teyit --show-stats --fail-on-change {args:tests}",
-  "flake8 {args:pandoc_latex_admonition docs}"
+  "flake8 {args:src docs}"
 ]
 lint-fix = [
-  "ruff check --fix {args:pandoc_latex_admonition docs}"
+  "ruff check --fix {args:src docs}"
 ]
 
-[tool.hatch.envs.dynamic-lint]
+[tool.hatch.envs.lint]
 dependencies = [
   "slotscheck~=0.19",
-  "pylint~=3.2"
+  "pylint~=3.3"
 ]
 
-[tool.hatch.envs.dynamic-lint.scripts]
+[tool.hatch.envs.lint.scripts]
 check = [
-  "slotscheck {args:pandoc_latex_admonition}",
-  "pylint {args:pandoc_latex_admonition}"
+  "slotscheck {args:src}",
+  "pylint {args:src}"
 ]
 
 [tool.hatch.envs.docs]
 dependencies = [
-  "myst-parser~=2.0",
-  "Sphinx~=7.2",
-  "sphinx-rtd-theme~=2.0",
+  "myst-parser~=4.0",
+  "Sphinx~=8.1",
+  "sphinx-rtd-theme~=3.0",
   "sphinx-copybutton~=0.5"
 ]
 
 [tool.hatch.envs.docs.scripts]
 build = "sphinx-build docs {args:build/sphinx/html}"
 
+[tool.pytest.ini_options]
+consider_namespace_packages = true
+pythonpath = ["src"]
+
 [tool.ruff]
 # Allow lines to be as long as 88.
 line-length = 88
+target-version = "py310"
 
 [tool.flake8]
 # flake8-docstrings
@@ -221,6 +227,7 @@ warn_return_any = true
 # equivalent to --strict option
 warn_unused_configs = true
 warn_unused_ignores = true
+mypy_path = "src"
 
 [[tool.mypy.overrides]]
 ignore_missing_imports = true
@@ -230,4 +237,4 @@ module = "panflute.*"
 convention = "numpy"
 
 [tool.coverage.run]
-source = ["pandoc_latex_admonition"]
+source = ["src"]
