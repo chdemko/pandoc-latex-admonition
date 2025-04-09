@@ -44,12 +44,13 @@ def default_environment() -> dict[str, Any]:
     }
 
 
-def x11colors():
+def x11colors() -> dict[str, str]:
     """
     Get the x11 colors.
 
     Returns
     -------
+    dict[str, str]
         The x11 colors
     """
     # See https://www.w3.org/TR/css-color-3/#svg-color
