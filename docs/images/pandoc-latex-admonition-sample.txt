@@ -3,7 +3,7 @@
 documentclass: book
 pandoc-latex-admonition:
   - color: firebrick
-    classes: [admonition, danger]
+    classes: [[admonition, danger]]
     position: inner
     linewidth: 4
     nobreak: true

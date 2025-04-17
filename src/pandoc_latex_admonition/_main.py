@@ -44,12 +44,13 @@ def default_environment() -> dict[str, Any]:
     }
 
 
-def x11colors():
+def x11colors() -> dict[str, str]:
     """
     Get the x11 colors.
 
     Returns
     -------
+    dict[str, str]
         The x11 colors
     """
     # See https://www.w3.org/TR/css-color-3/#svg-color
@@ -244,7 +245,7 @@ def admonition(elem: Element, doc: Doc) -> Element | None:
         # Loop on all font size definition
         for environment in doc.defined:
             # Are the classes correct?
-            if classes >= environment["classes"]:
+            if any(classes >= defined for defined in environment["classes"]):
                 return add_latex(elem, environment)
     return None
 
@@ -289,6 +290,19 @@ def add_latex(elem: Element, environment: dict[str, Any]) -> Element | None:
             )
         return None
 
+    if (
+        elem.tag == "Div"
+        and elem.content
+        and elem.content[0].tag == "Div"
+        and "title" in elem.content[0].classes
+        and elem.content[0].content[0].tag == "Para"
+    ):
+        elem.content[0].content[0].content.insert(
+            0,
+            RawInline(f"\\textbf{{\\color{{{environment['color']}}}", "tex"),
+        )
+        elem.content[0].content[0].content.append(RawInline("}", "tex"))
+
     images = []
 
     def extract_images(element, _doc):
@@ -324,6 +338,7 @@ def prepare(doc: Doc) -> None:
     # Get the meta data
     meta = doc.get_metadata("pandoc-latex-admonition")
 
+    # pylint: disable=too-many-nested-blocks
     if isinstance(meta, list):
         # Loop on all definitions
         for definition in meta:
@@ -344,7 +359,16 @@ def prepare(doc: Doc) -> None:
                     "localfootnotes",
                     "nobreak",
                 )
-                environment["classes"] = set(definition["classes"])
+                classes = []
+                if all(isinstance(elem, str) for elem in definition["classes"]):
+                    classes.append(set(definition["classes"]))
+                else:
+                    for elem in definition["classes"]:
+                        if isinstance(elem, str):
+                            classes.append({elem})
+                        else:
+                            classes.append({str(x) for x in elem})
+                environment["classes"] = classes
                 doc.defined.append(environment)
 
 
@@ -593,7 +617,9 @@ def define_nobreak(
         The nobreak key
     """
     if key_nobreak in definition:
-        environment["nobreak"] = definition[key_nobreak].lower() == "true"
+        environment["nobreak"] = (
+            str(definition[key_nobreak]).lower() == "true"  # noqa: FURB123
+        )
 
 
 def new_environment(doc: Doc, environment: dict[str, Any]) -> str:
