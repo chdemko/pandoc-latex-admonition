@@ -45,7 +45,7 @@ pandoc-latex-admonition:
     def test_codeblock_attributes(self):
         doc = AdmonitionTest.conversion(
             """
-::: {latex-admonition-color=xyz latex-admonition-linewidth=xyz' latex-admonition-margin=xyz latex-admonition-innermargin=xyz latex-admonition-localfootnotes=true} :::
+::: {latex-admonition-color=xyz latex-admonition-linewidth=xyz latex-admonition-margin=xyz latex-admonition-innermargin=xyz latex-admonition-localfootnotes=true} :::
 :::::::::
             """,
             "latex",

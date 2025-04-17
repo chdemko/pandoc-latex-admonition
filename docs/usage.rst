@@ -36,6 +36,10 @@ containing:
 
 -  ``classes``: the set of classes of the ``div``\ s to which the
    transformation will be applied. This parameter is mandatory.
+   It's either a list of strings and in this case, it represents the minimum
+   set of of classes that the element must have, or it's either a list of
+   sublists and each sublist represents the minimum set of classes that the
+   element must have.
 -  ``color``: the color name taken from the `X11 color
    collection <https://www.w3.org/TR/css3-color/#svg-color>`__.
 -  ``position``: the position of the admonition (``left`` by default or
