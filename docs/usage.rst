@@ -22,7 +22,7 @@ entry by a list of definitions:
    pandoc-latex-admonition:
    # order is important
      - color: firebrick
-       classes: [admonition, danger]
+       classes: [[admonition, danger]]
      - color: gray
        classes: [admonition]
 

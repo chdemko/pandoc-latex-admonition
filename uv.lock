@@ -24,7 +24,7 @@ wheels = [
 
 [[package]]
 name = "pandoc-latex-admonition"
-version = "1.4.0.0.post1.dev5"
+version = "1.4.0.0.post1.dev6"
 source = { editable = "." }
 dependencies = [
     { name = "panflute" },
